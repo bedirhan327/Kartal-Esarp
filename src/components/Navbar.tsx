@@ -119,14 +119,14 @@ export default function Navbar() {
           >
             <nav className="container mx-auto flex flex-col gap-1 px-4 py-4">
               {navLinks.slice(0, 2).map((link) => (
-                <Link key={link.href} href={link.href} onClick={closeMenu} className="rounded-lg py-2.5 px-3 hover:bg-purple-50 hover:text-purple-600">
+                <Link key={link.href} href={link.href} onClick={closeMenu} className={cn("rounded-lg py-2.5 px-3 text-base font-semibold text-gray-900 hover:bg-purple-50 hover:text-purple-600", pathname === link.href && "bg-purple-50 text-purple-600")}>
                   {link.name}
                 </Link>
               ))}
 
               <button
                 onClick={() => setIsCollectionsOpen(!isCollectionsOpen)}
-                className="flex items-center justify-between rounded-lg py-2.5 px-3 hover:bg-purple-50 hover:text-purple-600"
+                className="flex items-center justify-between rounded-lg py-2.5 px-3 text-base font-semibold text-gray-900 hover:bg-purple-50 hover:text-purple-600"
               >
                 Koleksiyonlar
                 <ChevronDown className={cn("h-4 w-4 transition-transform", isCollectionsOpen && "rotate-180")} />
@@ -141,7 +141,7 @@ export default function Navbar() {
                   >
                     <div className="flex flex-col gap-1 pl-4 pb-2">
                       {collections.map((col) => (
-                        <Link key={col.href} href={col.href} onClick={closeMenu} className="rounded-lg py-2 px-3 text-sm hover:bg-purple-50 hover:text-purple-600">
+                        <Link key={col.href} href={col.href} onClick={closeMenu} className={cn("rounded-lg py-2 px-3 text-sm font-medium text-gray-800 hover:bg-purple-50 hover:text-purple-600", pathname === col.href && "bg-purple-50 text-purple-600")}>
                           {col.name}
                         </Link>
                       ))}
@@ -151,7 +151,7 @@ export default function Navbar() {
               </AnimatePresence>
 
               {navLinks.slice(2).map((link) => (
-                <Link key={link.href} href={link.href} onClick={closeMenu} className="rounded-lg py-2.5 px-3 hover:bg-purple-50 hover:text-purple-600">
+                <Link key={link.href} href={link.href} onClick={closeMenu} className={cn("rounded-lg py-2.5 px-3 text-base font-semibold text-gray-900 hover:bg-purple-50 hover:text-purple-600", pathname === link.href && "bg-purple-50 text-purple-600")}>
                   {link.name}
                 </Link>
               ))}

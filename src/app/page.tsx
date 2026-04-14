@@ -24,10 +24,10 @@ const itemFadeIn = {
 };
 
 const categories = [
-  { name: "Jersey Sallar", href: "/koleksiyonlar/jersey", image: "https://images.unsplash.com/photo-1590080876351-941da357a4e4?w=400&h=400&fit=crop" },
-  { name: "Sifon Esarplar", href: "/koleksiyonlar/sifon", image: "https://images.unsplash.com/photo-1594938328870-9623159c8c99?w=400&h=400&fit=crop" },
-  { name: "Dokuma Serisi", href: "/koleksiyonlar/dokuma", image: "https://images.unsplash.com/photo-1613844237701-8f3664fc2eff?w=400&h=400&fit=crop" },
-  { name: "Saten Esarplar", href: "/koleksiyonlar/saten", image: "https://images.unsplash.com/photo-1606567595334-d39972c85dbe?w=400&h=400&fit=crop" },
+  { name: "Jersey Sallar", href: "/koleksiyonlar/jersey", image: "/products/esarp-036.jpeg" },
+  { name: "Sifon Esarplar", href: "/koleksiyonlar/sifon", image: "/products/esarp-017.jpeg" },
+  { name: "Dokuma Serisi", href: "/koleksiyonlar/dokuma", image: "/products/esarp-031.jpeg" },
+  { name: "Saten Esarplar", href: "/koleksiyonlar/saten", image: "/products/esarp-025.jpeg" },
 ];
 
 const featuredProducts = allProducts.slice(0, 6);
@@ -39,8 +39,8 @@ export default function Home() {
       <section className="relative h-[80vh] w-full overflow-hidden md:h-[90vh]">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?w=1920&h=1080&fit=crop"
-            alt="Kartal Esarp Hero"
+            src="/products/esarp-001.jpeg"
+            alt="Kartal Esarp Hero - Esarp Koleksiyonu"
             fill
             priority
             className="object-cover"

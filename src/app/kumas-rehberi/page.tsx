@@ -14,7 +14,7 @@ const fadeIn = {
 const fabrics = [
   {
     name: "Jersey",
-    image: "https://images.unsplash.com/photo-1590080876351-941da357a4e4?w=600&h=400&fit=crop",
+    image: "/products/esarp-036.jpeg",
     href: "/koleksiyonlar/jersey",
     features: ["Esnek ve rahat", "Kolay sarilir", "Burusma yapmaz", "Gun boyu konfor"],
     description: "Jersey kumas, ozellikle gunluk kullanim icin ideal bir tercih. Esnek yapisi sayesinde kolayca sarilir ve gun boyu yerinden kaymaz. Dogal dokusuyla cildi tahris etmez, nefes alabilir yapidadir.",
@@ -22,7 +22,7 @@ const fabrics = [
   },
   {
     name: "Sifon",
-    image: "https://images.unsplash.com/photo-1594938328870-9623159c8c99?w=600&h=400&fit=crop",
+    image: "/products/esarp-017.jpeg",
     href: "/koleksiyonlar/sifon",
     features: ["Hafif ve seffaf", "Zarif dokusu", "Sik gorunum", "Ozel gunler icin ideal"],
     description: "Sifon kumas, hafif ve havadar yapisiyla ozellikle ilkbahar-yaz aylarinda tercih edilen bir esarp kumasidir. Yumusak akiskanligiyla zarafet katar, ozel gun ve davetlerde sikliginizin tamamlayicisidir.",
@@ -30,7 +30,7 @@ const fabrics = [
   },
   {
     name: "Dokuma",
-    image: "https://images.unsplash.com/photo-1613844237701-8f3664fc2eff?w=600&h=400&fit=crop",
+    image: "/products/esarp-031.jpeg",
     href: "/koleksiyonlar/dokuma",
     features: ["Zengin doku", "Sicak tutar", "Dayanikli", "Dogal gorunum"],
     description: "Dokuma sallar, geleneksel el dokuma tekniklerinden ilham alan zengin desenleriyle one cikar. Kaliteli ipliklerle uretilen bu sallar, hem sicak tutar hem de kombinlerinize karakter katar.",
@@ -38,7 +38,7 @@ const fabrics = [
   },
   {
     name: "Saten",
-    image: "https://images.unsplash.com/photo-1606567595334-d39972c85dbe?w=600&h=400&fit=crop",
+    image: "/products/esarp-025.jpeg",
     href: "/koleksiyonlar/saten",
     features: ["Ipeksi parlaklk", "Lux his", "Kaygan yuzey", "Premium gorunum"],
     description: "Saten kumas, ipeksi parlakligi ve yumusak dokusuyla premium bir his sunar. Ozel dikis teknikleriyle islenen saten esarplar, her kombini bir ust seviyeye tasir. Isik altinda zarif bir pariltiya sahiptir.",

@@ -50,7 +50,7 @@ export default function Hakkimizda() {
               </p>
             </motion.div>
             <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, delay: 0.2 }} className="relative h-72 w-72 overflow-hidden rounded-3xl shadow-2xl md:h-96 md:w-96">
-              <Image src="https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?w=600&h=600&fit=crop" alt="Kartal Esarp Atolye" fill className="object-cover" sizes="400px" />
+              <Image src="/products/esarp-008.jpeg" alt="Kartal Esarp Atolye" fill className="object-cover" sizes="400px" />
             </motion.div>
           </div>
         </div>

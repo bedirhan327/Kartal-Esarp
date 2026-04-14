@@ -17,44 +17,50 @@ interface CollectionConfig {
 
 const collections: Record<string, CollectionConfig> = {
   "sinirli-uretim": {
-    title: "Sinirli Uretim",
-    description: "Ozel tasarim, sinirli sayida uretilen esarp ve sallar",
-    longDescription: "Sinirli uretim koleksiyonumuz, ozel tasarim desenleri ve premium kumaslarla hazirlanan benzersiz parcalardan olusur. Her model sinirli sayida uretilir ve tukendikten sonra yeniden uretilmez. Bu parcalara sahip olmak, tarzinizi benzersiz kilmanin en ozel yoludur.",
-    image: "/products/esarp-007.jpeg",
+    title: "Sınırlı üretim",
+    description: "Özel tasarım, sınırlı sayıda üretilen eşarp ve şallar",
+    longDescription:
+      "Sınırlı üretim koleksiyonumuz, özel tasarım desenleri ve premium kumaşlarla hazırlanan benzersiz parçalardan oluşur. Her model sınırlı sayıda üretilir ve tükendikten sonra yeniden üretilmez. Bu parçalara sahip olmak, tarzınızı benzersiz kılmanın en özel yoludur.",
+    image: "/products/esarp-097.jpeg",
     isLimited: true,
   },
   jersey: {
-    title: "Jersey Koleksiyonu",
-    description: "Yumusacik doku, gun boyu konfor",
-    longDescription: "Jersey sallarimiz, esnek ve yumusak yapilariyla gunluk kullanimda en cok tercih edilen modellerimiz arasinda. Kolay sarilir, burusmaz ve cildi tahris etmez. Her mevsim kullanima uygun genis renk yelpazemiz ile tarzniza uygun modeli bulabilirsiniz.",
+    title: "Jersey koleksiyonu",
+    description: "Yumuşacık doku, gün boyu konfor",
+    longDescription:
+      "Jersey şallarımız, esnek ve yumuşak yapılarıyla günlük kullanımda en çok tercih edilen modellerimiz arasında. Kolay sarılır, buruşmaz ve cildi tahriş etmez. Her mevsim kullanıma uygun geniş renk yelpazemiz ile tarzınıza uygun modeli bulabilirsiniz.",
     image: "/products/esarp-003.jpeg",
     category: "jersey",
   },
   sifon: {
-    title: "Sifon Koleksiyonu",
-    description: "Hafiflik ve zarafetin bulusma noktasi",
-    longDescription: "Sifon esarplarimiz, hafif ve havadar dokusuyla ozellikle ilkbahar-yaz aylarinda one cikar. Zarif akiskanligiyla hem gunluk hem de ozel gunlerde kullanilabilir. Canli renklerden pastel tonlara kadar genis bir secenekle sunulur.",
+    title: "Şifon koleksiyonu",
+    description: "Hafiflik ve zarafetin buluşma noktası",
+    longDescription:
+      "Şifon eşarplarımız, hafif ve havadar dokusuyla özellikle ilkbahar-yaz aylarında öne çıkar. Zarif akışkanlığıyla hem günlük hem de özel günlerde kullanılabilir. Canlı renklerden pastel tonlara kadar geniş bir seçenekle sunulur.",
     image: "/products/esarp-004.jpeg",
     category: "sifon",
   },
   dokuma: {
-    title: "Dokuma Koleksiyonu",
+    title: "Dokuma koleksiyonu",
     description: "Gelenekten ilham, modern yorumlar",
-    longDescription: "Dokuma sallarimiz, geleneksel el sanatlarina yapilan bir saygidir. Zengin desenleri ve dayanikli yapisiyla kislik kullanima idealdir. Her bir parcada dogal liflerin sicakligi ve el isinin estetigini hissedebilirsiniz.",
+    longDescription:
+      "Dokuma şallarımız, geleneksel el sanatlarına yapılan bir saygıdır. Zengin desenleri ve dayanıklı yapısıyla kışlık kullanıma idealdir. Her bir parçada doğal liflerin sıcaklığı ve el işinin estetiğini hissedebilirsiniz.",
     image: "/products/esarp-006.jpeg",
     category: "dokuma",
   },
   saten: {
-    title: "Saten Koleksiyonu",
-    description: "Ipeksi his, premium gorunum",
-    longDescription: "Saten esarplarimiz, ipeksi parlakligi ve kaygan dokusuyla lux bir deneyim sunar. Isik altinda zarif bir pariltiya sahip olan bu modeller, ozel gunler ve davetler icin mukemmel bir tamamlayici. Her kombini bir ust seviyeye tasir.",
+    title: "Saten koleksiyonu",
+    description: "İpeksi his, premium görünüm",
+    longDescription:
+      "Saten eşarplarımız, ipeksi parlaklığı ve kaygan dokusuyla lüks bir deneyim sunar. Işık altında zarif bir parıltıya sahip olan bu modeller, özel günler ve davetler için mükemmel bir tamamlayıcı. Her kombini bir üst seviyeye taşır.",
     image: "/products/esarp-002.jpeg",
     category: "saten",
   },
   spor: {
-    title: "Spor Koleksiyon",
-    description: "Aktif yasam icin tasarlandi",
-    longDescription: "Spor koleksiyonumuz, aktif bir yasam surdurenler icin tasarlandi. Nefes alan kumaslar, pratik kesimler ve canli renkler ile hareket halindeyken bile sikinizi koruyun. Yogadan yuruyuse, alissveristen kahve molasina kadar her aniz icin ideal.",
+    title: "Spor koleksiyon",
+    description: "Aktif yaşam için tasarlandı",
+    longDescription:
+      "Spor koleksiyonumuz, aktif bir yaşam sürdürenler için tasarlandı. Nefes alan kumaşlar, pratik kesimler ve canlı renkler ile hareket halindeyken bile şıklığınızı koruyun. Yogadan yürüyüşe, alışverişten kahve molasına kadar her anınız için ideal.",
     image: "/products/esarp-005.jpeg",
     category: "spor",
   },
@@ -92,7 +98,12 @@ export default function CollectionPage() {
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-4xl font-bold text-white md:text-6xl">
             {config.title}
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mt-4 max-w-2xl text-lg text-white/80">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="mt-4 max-w-2xl text-lg text-white/80"
+          >
             {config.description}
           </motion.p>
         </div>
@@ -101,7 +112,12 @@ export default function CollectionPage() {
       {/* About */}
       <section className="bg-white py-12">
         <div className="container mx-auto px-4">
-          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mx-auto max-w-3xl text-center text-gray-600 leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mx-auto max-w-3xl text-center text-gray-600 leading-relaxed"
+          >
             {config.longDescription}
           </motion.p>
         </div>
@@ -110,7 +126,12 @@ export default function CollectionPage() {
       {/* Products */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          >
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

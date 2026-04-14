@@ -16,11 +16,11 @@ export const metadata: Metadata = {
     template: "%s | Kartal Esarp",
   },
   description:
-    "Kartal Esarp - Kutahya'dan Turkiye'nin dort bir yanina premium esarp ve sal koleksiyonu. Jersey, sifon, dokuma ve saten modelleri kesfet.",
-  keywords: ["esarp", "sal", "jersey sal", "sifon esarp", "saten esarp", "dokuma sal", "kartal esarp", "kutahya"],
+    "Kartal Eşarp - Kütahya'dan Türkiye'nin dört bir yanına premium eşarp ve şal koleksiyonu. Jersey, şifon, dokuma ve saten modellerini keşfedin.",
+  keywords: ["eşarp", "şal", "jersey şal", "şifon eşarp", "saten eşarp", "dokuma şal", "kartal eşarp", "kütahya"],
   openGraph: {
     title: "Kartal Esarp | Zarafet ve Kalitenin Adresi",
-    description: "Premium esarp ve sal koleksiyonu. Kutahya'dan Turkiye'nin dort bir yanina.",
+    description: "Premium eşarp ve şal koleksiyonu. Kütahya'dan Türkiye'nin dört bir yanına.",
     type: "website",
     locale: "tr_TR",
   },

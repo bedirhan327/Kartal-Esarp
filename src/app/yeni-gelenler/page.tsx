@@ -18,7 +18,7 @@ export default function YeniGelenler() {
             Yeni Gelenler
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mt-4 text-lg text-white/80">
-            En yeni koleksiyonumuzu kesfet, trendlerin bir adim onunde ol
+            En yeni koleksiyonumuzu keşfedin; trendlerin bir adım önünde olun
           </motion.p>
         </div>
       </section>

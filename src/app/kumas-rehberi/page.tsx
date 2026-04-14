@@ -16,33 +16,37 @@ const fabrics = [
     name: "Jersey",
     image: "/products/esarp-036.jpeg",
     href: "/koleksiyonlar/jersey",
-    features: ["Esnek ve rahat", "Kolay sarilir", "Burusma yapmaz", "Gun boyu konfor"],
-    description: "Jersey kumas, ozellikle gunluk kullanim icin ideal bir tercih. Esnek yapisi sayesinde kolayca sarilir ve gun boyu yerinden kaymaz. Dogal dokusuyla cildi tahris etmez, nefes alabilir yapidadir.",
-    care: "30 derecede camesir makinesinde yikanabilir. Kurutma makinesi dusuk isida kullanilabilir. Utuye gerek yoktur.",
+    features: ["Esnek ve rahat", "Kolay sarılır", "Buruşma yapmaz", "Gün boyu konfor"],
+    description:
+      "Jersey kumaş, özellikle günlük kullanım için ideal bir tercih. Esnek yapısı sayesinde kolayca sarılır ve gün boyu yerinden kaymaz. Doğal dokusuyla cildi tahriş etmez, nefes alabilir yapıdadır.",
+    care: "30 derecede çamaşır makinesinde yıkanabilir. Kurutma makinesi düşük ısıda kullanılabilir. Ütüye gerek yoktur.",
   },
   {
-    name: "Sifon",
-    image: "/products/esarp-017.jpeg",
+    name: "Şifon",
+    image: "/products/esarp-102.jpeg",
     href: "/koleksiyonlar/sifon",
-    features: ["Hafif ve seffaf", "Zarif dokusu", "Sik gorunum", "Ozel gunler icin ideal"],
-    description: "Sifon kumas, hafif ve havadar yapisiyla ozellikle ilkbahar-yaz aylarinda tercih edilen bir esarp kumasidir. Yumusak akiskanligiyla zarafet katar, ozel gun ve davetlerde sikliginizin tamamlayicisidir.",
-    care: "Elde yikama onerilir. Iliman suya az miktarda deterjan ekleyin. Golgede kurutun. Dusuk isida utuleyin.",
+    features: ["Hafif ve şeffaf", "Zarif dokusu", "Şık görünüm", "Özel günler için ideal"],
+    description:
+      "Şifon kumaş, hafif ve havadar yapısıyla özellikle ilkbahar-yaz aylarında tercih edilen bir eşarp kumaşıdır. Yumuşak akışkanlığıyla zarafet katar, özel gün ve davetlerde şıklığınızın tamamlayıcısıdır.",
+    care: "Elde yıkama önerilir. Ilıman suya az miktarda deterjan ekleyin. Gölgede kurutun. Düşük ısıda ütüleyin.",
   },
   {
     name: "Dokuma",
     image: "/products/esarp-031.jpeg",
     href: "/koleksiyonlar/dokuma",
-    features: ["Zengin doku", "Sicak tutar", "Dayanikli", "Dogal gorunum"],
-    description: "Dokuma sallar, geleneksel el dokuma tekniklerinden ilham alan zengin desenleriyle one cikar. Kaliteli ipliklerle uretilen bu sallar, hem sicak tutar hem de kombinlerinize karakter katar.",
-    care: "Kuru temizleme onerilir. Ev yikamasinda elde, soguk suyla nazikce yikayin. Duz zeminde golgede kurutun.",
+    features: ["Zengin doku", "Sıcak tutar", "Dayanıklı", "Doğal görünüm"],
+    description:
+      "Dokuma şallar, geleneksel el dokuma tekniklerinden ilham alan zengin desenleriyle öne çıkar. Kaliteli ipliklerle üretilen bu şallar, hem sıcak tutar hem de kombinlerinize karakter katar.",
+    care: "Kuru temizleme önerilir. Ev yıkamasında elde, soğuk suyla nazikçe yıkayın. Düz zeminde gölgede kurutun.",
   },
   {
     name: "Saten",
     image: "/products/esarp-025.jpeg",
     href: "/koleksiyonlar/saten",
-    features: ["Ipeksi parlaklk", "Lux his", "Kaygan yuzey", "Premium gorunum"],
-    description: "Saten kumas, ipeksi parlakligi ve yumusak dokusuyla premium bir his sunar. Ozel dikis teknikleriyle islenen saten esarplar, her kombini bir ust seviyeye tasir. Isik altinda zarif bir pariltiya sahiptir.",
-    care: "Elde yikama onerilir. Ters cevirip dusuk isida utuleyin. Dogrudan guneslikte kurutmayin.",
+    features: ["İpeksi parlaklık", "Lüks his", "Kaygan yüzey", "Premium görünüm"],
+    description:
+      "Saten kumaş, ipeksi parlaklığı ve yumuşak dokusuyla premium bir his sunar. Özel dikiş teknikleriyle işlenen saten eşarplar, her kombini bir üst seviyeye taşır. Işık altında zarif bir parıltıya sahiptir.",
+    care: "Elde yıkama önerilir. Ters çevirip düşük ısıda ütüleyin. Doğrudan güneşlikte kurutmayın.",
   },
 ];
 
@@ -52,10 +56,15 @@ export default function KumasRehberi() {
       <section className="bg-gradient-to-r from-purple-600 to-pink-600 py-16">
         <div className="container mx-auto px-4 text-center">
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-4xl font-bold text-white md:text-5xl">
-            Kumas Rehberi
+            Kumaş rehberi
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mt-4 text-lg text-white/80">
-            Dogru kumasi secmek icin bilmeniz gereken her sey
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="mt-4 text-lg text-white/80"
+          >
+            Doğru kumaşı seçmek için bilmeniz gereken her şey
           </motion.p>
         </div>
       </section>
@@ -88,12 +97,12 @@ export default function KumasRehberi() {
                     ))}
                   </div>
                   <div className="rounded-2xl bg-purple-50 p-5">
-                    <h4 className="mb-2 text-sm font-bold uppercase tracking-wide text-purple-600">Bakim Onerisi</h4>
+                    <h4 className="mb-2 text-sm font-bold uppercase tracking-wide text-purple-600">Bakım önerisi</h4>
                     <p className="text-sm text-gray-600">{fabric.care}</p>
                   </div>
                   <Link href={fabric.href}>
                     <Button className="rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-6 text-white hover:from-purple-700 hover:to-pink-700">
-                      {fabric.name} Koleksiyonunu Incele
+                      {fabric.name} koleksiyonunu inceleyin
                       <ChevronRight className="ml-2 h-4 w-4" />
                     </Button>
                   </Link>

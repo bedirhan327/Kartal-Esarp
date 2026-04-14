@@ -20,17 +20,33 @@ const itemFadeIn = {
 };
 
 const stats = [
-  { number: "5000+", label: "Mutlu Musteri" },
-  { number: "500+", label: "Urun Cesidi" },
-  { number: "81", label: "Il'e Teslimat" },
-  { number: "10+", label: "Yillik Tecrube" },
+  { number: "5000+", label: "Mutlu müşteri" },
+  { number: "500+", label: "Ürün çeşidi" },
+  { number: "81", label: "İllere teslimat" },
+  { number: "10+", label: "Yıllık tecrübe" },
 ];
 
 const values = [
-  { icon: <Heart className="h-7 w-7" />, title: "Tutku ile Uretim", desc: "Her esarpi tasarlarken ve uretirken isten duyarak calisiyoruz. Kalitemiz tutkumuzun yansimasi." },
-  { icon: <Award className="h-7 w-7" />, title: "Kalite Standardi", desc: "En iyi kumaslari titizlikle secip, her adimda kalite kontrolu uyguluyoruz." },
-  { icon: <Users className="h-7 w-7" />, title: "Musteri Odakli", desc: "Musterilerimizin memnuniyeti en buyuk oncelikimiz. WhatsApp ile her zaman yaninizdayiz." },
-  { icon: <Leaf className="h-7 w-7" />, title: "Surdurulebilirlik", desc: "Cevre dostu uretim sureclerine onem veriyor, surdurulebilir moda anlayisini benimsiyoruz." },
+  {
+    icon: <Heart className="h-7 w-7" />,
+    title: "Tutku ile üretim",
+    desc: "Her eşarpı tasarlarken ve üretirken işten duyarak çalışıyoruz. Kalitemiz tutkumuzun yansıması.",
+  },
+  {
+    icon: <Award className="h-7 w-7" />,
+    title: "Kalite standardı",
+    desc: "En iyi kumaşları titizlikle seçip, her adımda kalite kontrolü uyguluyoruz.",
+  },
+  {
+    icon: <Users className="h-7 w-7" />,
+    title: "Müşteri odaklı",
+    desc: "Müşterilerimizin memnuniyeti en büyük önceliğimiz. WhatsApp ile her zaman yanınızdayız.",
+  },
+  {
+    icon: <Leaf className="h-7 w-7" />,
+    title: "Sürdürülebilirlik",
+    desc: "Çevre dostu üretim süreçlerine önem veriyor, sürdürülebilir moda anlayışını benimsiyoruz.",
+  },
 ];
 
 export default function Hakkimizda() {
@@ -41,16 +57,22 @@ export default function Hakkimizda() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center gap-10 lg:flex-row">
             <motion.div initial="hidden" animate="visible" variants={fadeIn} className="flex-1 text-center lg:text-left">
-              <h1 className="mb-6 text-4xl font-bold text-white md:text-5xl">Biz Kimiz?</h1>
+              <h1 className="mb-6 text-4xl font-bold text-white md:text-5xl">Biz kimiz?</h1>
               <p className="mb-4 text-lg text-white/90 leading-relaxed">
-                Kartal Esarp, Kutahya&apos;nin kalbinde 10 yili askin suredir esarp ve sal uretimi yapan, kaliteyi ve zarafeti bir araya getiren bir markadik.
+                Kartal Eşarp, Kütahya&apos;nın kalbinde 10 yılı aşkın süredir eşarp ve şal üretimi yapan, kaliteyi ve zarafeti bir araya getiren bir markadır.
               </p>
               <p className="text-lg text-white/80 leading-relaxed">
-                Geleneksel el sanatlarindan ilham alan modern tasarimlarimizla, Turkiye&apos;nin dort bir yanindaki kadinlara hizmet veriyoruz. Her urunumuz, titiz bir secim ve ozenli bir iscilik surecinden gecerek sizlere ulasir.
+                Geleneksel el sanatlarından ilham alan modern tasarımlarımızla, Türkiye&apos;nin dört bir yanındaki kadınlara hizmet veriyoruz. Her ürünümüz, titiz bir
+                seçim ve özenli bir işçilik sürecinden geçerek sizlere ulaşır.
               </p>
             </motion.div>
-            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, delay: 0.2 }} className="relative h-72 w-72 overflow-hidden rounded-3xl shadow-2xl md:h-96 md:w-96">
-              <Image src="/products/esarp-008.jpeg" alt="Kartal Esarp Atolye" fill className="object-cover" sizes="400px" />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative h-72 w-72 overflow-hidden rounded-3xl shadow-2xl md:h-96 md:w-96"
+            >
+              <Image src="/products/esarp-008.jpeg" alt="Kartal Eşarp atölye" fill className="object-cover" sizes="400px" />
             </motion.div>
           </div>
         </div>
@@ -59,7 +81,13 @@ export default function Hakkimizda() {
       {/* Stats */}
       <section className="bg-white py-16">
         <div className="container mx-auto px-4">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="grid grid-cols-2 gap-8 md:grid-cols-4">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className="grid grid-cols-2 gap-8 md:grid-cols-4"
+          >
             {stats.map((stat) => (
               <motion.div key={stat.label} variants={itemFadeIn} className="text-center">
                 <div className="text-4xl font-extrabold text-transparent bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text md:text-5xl">
@@ -76,12 +104,22 @@ export default function Hakkimizda() {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="mb-12 text-center">
-            <h2 className="mb-3 text-3xl font-bold text-gray-900 md:text-4xl">Degerlerimiz</h2>
-            <p className="text-gray-500">Bizi biz yapan degerler ve calisan ilkelerimiz</p>
+            <h2 className="mb-3 text-3xl font-bold text-gray-900 md:text-4xl">Değerlerimiz</h2>
+            <p className="text-gray-500">Bizi biz yapan değerler ve iş ilkelerimiz</p>
           </motion.div>
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className="grid gap-8 md:grid-cols-2 lg:grid-cols-4"
+          >
             {values.map((v) => (
-              <motion.div key={v.title} variants={itemFadeIn} className="rounded-2xl bg-white p-6 shadow-lg text-center hover:shadow-xl transition-shadow">
+              <motion.div
+                key={v.title}
+                variants={itemFadeIn}
+                className="rounded-2xl bg-white p-6 shadow-lg text-center hover:shadow-xl transition-shadow"
+              >
                 <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-100 to-pink-100 text-purple-600">
                   {v.icon}
                 </div>
@@ -100,16 +138,18 @@ export default function Hakkimizda() {
             <h2 className="mb-6 text-3xl font-bold text-gray-900 md:text-4xl">Hikayemiz</h2>
             <div className="space-y-4 text-gray-600 leading-relaxed">
               <p>
-                Kartal Esarp, 2014 yilinda Kutahya&apos;da kucuk bir atolvede basladiyi yolculugunda bugun Turkiye&apos;nin dort bir yanina ulasan bir marka haline geldi.
+                Kartal Eşarp, 2014 yılında Kütahya&apos;da küçük bir atölyede başladığı yolculuğunda bugün Türkiye&apos;nin dört bir yanına ulaşan bir marka haline geldi.
               </p>
               <p>
-                Kurucumuz, ailesinden devraldigi kumas bilgisi ve esarp tutokusuyla yola cikarak, her kadinin dolabinda olmasi gereken kaliteli ve sik esarplar uretmeyi hedefledi.
+                Kurucumuz, ailesinden devraldığı kumaş bilgisi ve eşarp tutkusuyla yola çıkarak, her kadının dolabında olması gereken kaliteli ve şık eşarplar üretmeyi
+                hedefledi.
               </p>
               <p>
-                Bugün jersey, sifon, dokuma ve saten olmak uzere farkli kumas cesitlerinde yuzlerce model sunuyoruz. Her sezon yenilenen koleksiyonlarimizla trendleri yakindan takip ediyor, musterilerimize en iyi urunleri sunuyoruz.
+                Bugün jersey, şifon, dokuma ve saten olmak üzere farklı kumaş çeşitlerinde yüzlerce model sunuyoruz. Her sezon yenilenen koleksiyonlarımızla trendleri
+                yakından takip ediyor, müşterilerimize en iyi ürünleri sunuyoruz.
               </p>
               <p>
-                WhatsApp ile kolay siparis sistemimiz sayesinde Turkiye&apos;nin neresinde olursaniz olun, Kartal Esarp kalitesine kolayca ulasabilirsiniz.
+                WhatsApp ile kolay sipariş sistemimiz sayesinde Türkiye&apos;nin neresinde olursanız olun, Kartal Eşarp kalitesine kolayca ulaşabilirsiniz.
               </p>
             </div>
           </motion.div>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Camera, Phone, Mail, MapPin } from "lucide-react";
+import { Phone, MapPin } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -8,15 +8,15 @@ export default function Footer() {
         <div className="mb-8 grid gap-8 md:grid-cols-4">
           <div>
             <h3 className="mb-4 text-2xl font-bold">KARTAL ESARP</h3>
-            <p className="text-purple-200">Zarafet ve kalitenin adresi. Kutahya&apos;dan Turkiye&apos;nin dort bir yanina.</p>
+            <p className="text-purple-200">Zarafet ve kalitenin adresi. Kütahya&apos;dan Türkiye&apos;nin dört bir yanına.</p>
           </div>
           <div>
-            <h4 className="mb-4 font-bold">Hizli Linkler</h4>
+            <h4 className="mb-4 font-bold">Hızlı bağlantılar</h4>
             <div className="space-y-2">
               <Link href="/" className="block text-purple-200 hover:text-white transition-colors">Anasayfa</Link>
               <Link href="/yeni-gelenler" className="block text-purple-200 hover:text-white transition-colors">Yeni Gelenler</Link>
-              <Link href="/kumas-rehberi" className="block text-purple-200 hover:text-white transition-colors">Kumas Rehberi</Link>
-              <Link href="/hakkimizda" className="block text-purple-200 hover:text-white transition-colors">Hakkimizda</Link>
+              <Link href="/kumas-rehberi" className="block text-purple-200 hover:text-white transition-colors">Kumaş rehberi</Link>
+              <Link href="/hakkimizda" className="block text-purple-200 hover:text-white transition-colors">Hakkımızda</Link>
             </div>
           </div>
           <div>
@@ -30,30 +30,22 @@ export default function Footer() {
             </div>
           </div>
           <div>
-            <h4 className="mb-4 font-bold">Iletisim</h4>
+            <h4 className="mb-4 font-bold">İletişim</h4>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <MapPin className="h-5 w-5 shrink-0 text-purple-300" />
-                <span className="text-purple-200 text-sm">Kutahya, Turkiye</span>
+                <span className="text-purple-200 text-sm">Kütahya, Türkiye</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-5 w-5 shrink-0 text-purple-300" />
-                <span className="text-purple-200 text-sm">+90 5XX XXX XX XX</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Mail className="h-5 w-5 shrink-0 text-purple-300" />
-                <span className="text-purple-200 text-sm">info@kartalesarp.com</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Camera className="h-5 w-5 shrink-0 text-purple-300" />
-                <span className="text-purple-200 text-sm">@kartalesarp</span>
+                <span className="text-purple-200 text-sm">+90 554 240 07 64</span>
               </div>
             </div>
           </div>
         </div>
         <div className="border-t border-white/20 pt-8 text-center">
           <p className="mb-2 text-purple-200">Kartal Esarp &copy; {new Date().getFullYear()}</p>
-          <p className="text-sm text-purple-300">Tum siparisler Kutahya merkezimizden ozenle gonderilmektedir.</p>
+          <p className="text-sm text-purple-300">Tüm siparişler Kütahya merkezimizden özenle gönderilmektedir.</p>
         </div>
       </div>
     </footer>

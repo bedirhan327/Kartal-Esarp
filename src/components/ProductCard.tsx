@@ -4,8 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { MessageCircle, Sparkles, Eye } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import type { Product } from "@/lib/products";
 import { handleWhatsAppOrder } from "@/lib/products";
 
@@ -16,68 +14,75 @@ const itemFadeIn = {
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <motion.div variants={itemFadeIn} whileHover={{ y: -8 }} className="group">
-      <Card className="overflow-hidden border-2 border-purple-100 transition-all hover:border-purple-300 hover:shadow-xl">
-        <Link href={`/urun/${product.id}`} className="block">
-          <div className="relative aspect-square overflow-hidden">
-            <Image
-              src={product.image}
-              alt={product.name}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-110"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            />
-            {product.isNew && (
-              <span className="absolute top-3 left-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-3 py-1 text-xs font-bold text-white">
-                YENi
+    <motion.div variants={itemFadeIn} whileHover={{ y: -6 }} className="group">
+      <Link href={`/urun/${product.id}`} className="block">
+        <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-md transition-shadow hover:shadow-xl">
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
+
+          {/* Badges */}
+          {product.isNew && (
+            <span className="absolute top-3 left-3 z-20 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-gray-900 shadow-md backdrop-blur-sm">
+              YENİ
+            </span>
+          )}
+          {product.isLimited && (
+            <span className="absolute top-3 right-3 z-20 flex items-center gap-1 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-amber-600 shadow-md backdrop-blur-sm">
+              <Sparkles className="h-3 w-3" /> Sınırlı
+            </span>
+          )}
+
+          {/* Hover overlay gradient */}
+          <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+          {/* Hover content */}
+          <div className="absolute bottom-0 left-0 right-0 z-20 translate-y-4 p-5 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+            <p className="mb-1 text-xs font-bold uppercase tracking-wider text-white/60">
+              {product.brand} &middot; {product.material}
+            </p>
+            <h3 className="mb-1.5 text-base font-bold leading-snug text-white">{product.name}</h3>
+            <p className="mb-3 line-clamp-2 text-sm leading-relaxed text-white/60">{product.description}</p>
+            <div className="mb-4 flex items-center gap-3">
+              <span className="text-xl font-bold text-white">{product.price.toLocaleString("tr-TR")} TL</span>
+              {product.oldPrice && (
+                <span className="text-sm text-white/40 line-through">{product.oldPrice.toLocaleString("tr-TR")} TL</span>
+              )}
+              {product.oldPrice && (
+                <span className="rounded-full bg-red-500/80 px-2 py-0.5 text-xs font-bold text-white">
+                  -%{Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)}
+                </span>
+              )}
+            </div>
+            <div className="relative z-30 flex gap-2">
+              <span className="flex flex-1 items-center justify-center gap-1.5 rounded-full border border-white/30 bg-white/10 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20">
+                <Eye className="h-4 w-4" /> Detayı Gör
               </span>
-            )}
-            {product.isLimited && (
-              <span className="absolute top-3 right-3 flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 px-3 py-1 text-xs font-bold text-white">
-                <Sparkles className="h-3 w-3" /> SINIRLI
-              </span>
-            )}
-            <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/20">
-              <span className="flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-gray-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100 shadow-lg">
-                <Eye className="h-4 w-4" /> Detayi Gor
+              {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
+              <span
+                className="flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-full bg-green-500 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-green-600"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  window.open(handleWhatsAppOrder(product), "_blank", "noopener,noreferrer");
+                }}
+              >
+                <MessageCircle className="h-4 w-4" /> Sipariş Ver
               </span>
             </div>
           </div>
-        </Link>
-        <div className="p-5">
-          <div className="mb-2 flex items-center gap-2">
-            <span className="rounded-md bg-purple-100 px-2 py-0.5 text-xs font-bold text-purple-700">{product.brand}</span>
-            <span className="text-xs text-gray-400">{product.material}</span>
-          </div>
-          <Link href={`/urun/${product.id}`}>
-            <h3 className="mb-1 text-base font-semibold text-gray-900 hover:text-purple-600 transition-colors">{product.name}</h3>
-          </Link>
-          <p className="mb-3 text-sm text-gray-500 line-clamp-2">{product.description}</p>
-          <div className="mb-4 flex flex-wrap items-center gap-2">
-            <span className="text-xl font-bold text-purple-600">{product.price.toLocaleString("tr-TR")} TL</span>
-            {product.oldPrice && (
-              <span className="text-sm text-gray-400 line-through">{product.oldPrice.toLocaleString("tr-TR")} TL</span>
-            )}
-            {product.oldPrice && (
-              <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-bold text-red-600">
-                %{Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)}
-              </span>
-            )}
-          </div>
-          <div className="flex gap-2">
-            <Link href={`/urun/${product.id}`} className="flex-1">
-              <Button variant="outline" className="w-full rounded-full border-purple-200 text-purple-600 hover:bg-purple-50">
-                <Eye className="mr-1.5 h-4 w-4" /> Incele
-              </Button>
-            </Link>
-            <a href={handleWhatsAppOrder(product)} target="_blank" rel="noopener noreferrer" className="flex-1">
-              <Button className="whatsapp-button w-full rounded-full bg-green-500 text-white hover:bg-green-600">
-                <MessageCircle className="mr-1.5 h-4 w-4" /> Siparis
-              </Button>
-            </a>
+
+          {/* Default visible info (disappears on hover) */}
+          <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-black/70 to-transparent p-4 transition-opacity duration-300 group-hover:opacity-0">
+            <p className="text-xs font-medium text-white/70">{product.brand}</p>
+            <p className="text-base font-bold text-white">{product.price.toLocaleString("tr-TR")} TL</p>
           </div>
         </div>
-      </Card>
+      </Link>
     </motion.div>
   );
 }

@@ -34,9 +34,13 @@ export default function ProductDetail() {
       <div className="bg-white border-b border-gray-100">
         <div className="container mx-auto px-4 py-3">
           <nav className="flex items-center gap-2 text-sm text-gray-500">
-            <Link href="/" className="hover:text-purple-600 transition-colors">Anasayfa</Link>
+            <Link href="/" className="hover:text-purple-600 transition-colors">
+              Anasayfa
+            </Link>
             <ChevronRight className="h-3 w-3" />
-            <Link href="/yeni-gelenler" className="hover:text-purple-600 transition-colors">Urunler</Link>
+            <Link href="/yeni-gelenler" className="hover:text-purple-600 transition-colors">
+              Ürünler
+            </Link>
             <ChevronRight className="h-3 w-3" />
             <span className="font-medium text-gray-900 truncate">{product.name}</span>
           </nav>
@@ -60,12 +64,12 @@ export default function ProductDetail() {
                 />
                 {product.isNew && (
                   <span className="absolute top-4 left-4 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-4 py-1.5 text-sm font-bold text-white shadow-lg">
-                    YENi SEZON
+                    Yeni sezon
                   </span>
                 )}
                 {product.isLimited && (
                   <span className="absolute top-4 right-4 flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 px-4 py-1.5 text-sm font-bold text-white shadow-lg">
-                    <Sparkles className="h-4 w-4" /> SINIRLI URETIM
+                    <Sparkles className="h-4 w-4" /> Sınırlı üretim
                   </span>
                 )}
               </div>
@@ -74,9 +78,7 @@ export default function ProductDetail() {
             {/* Info */}
             <div className="flex flex-col justify-center space-y-6">
               <div>
-                <span className="mb-2 inline-block rounded-lg bg-purple-100 px-3 py-1 text-sm font-bold text-purple-700">
-                  {product.brand}
-                </span>
+                <span className="mb-2 inline-block rounded-lg bg-purple-100 px-3 py-1 text-sm font-bold text-purple-700">{product.brand}</span>
                 <h1 className="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">{product.name}</h1>
               </div>
 
@@ -128,7 +130,7 @@ export default function ProductDetail() {
 
               {/* Care */}
               <div className="rounded-2xl bg-purple-50 p-5">
-                <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-purple-600">Bakim Talimatl</h3>
+                <h3 className="mb-2 text-sm font-bold uppercase tracking-wide text-purple-600">Bakım talimatları</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{product.careInstructions}</p>
               </div>
 
@@ -136,12 +138,12 @@ export default function ProductDetail() {
               <a href={handleWhatsAppOrder(product)} target="_blank" rel="noopener noreferrer">
                 <Button size="lg" className="whatsapp-button w-full rounded-full bg-green-500 py-7 text-lg font-semibold text-white hover:bg-green-600 shadow-xl">
                   <MessageCircle className="mr-2 h-5 w-5" />
-                  WhatsApp ile Siparis Ver
+                  WhatsApp ile sipariş ver
                 </Button>
               </a>
 
               <p className="text-center text-sm text-gray-400">
-                Urun kodu: <span className="font-semibold">KE-{String(product.id).padStart(4, "0")}</span> &middot; 1-3 is gunu icinde kargoya verilir
+                Ürün kodu: <span className="font-semibold">KE-{String(product.id).padStart(4, "0")}</span> &middot; 1-3 iş günü içinde kargoya verilir
               </p>
             </div>
           </motion.div>
@@ -152,8 +154,14 @@ export default function ProductDetail() {
       {similar.length > 0 && (
         <section className="bg-white py-16">
           <div className="container mx-auto px-4">
-            <h2 className="mb-8 text-center text-2xl font-bold text-gray-900 md:text-3xl">Benzer Urunler</h2>
-            <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true }} className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <h2 className="mb-8 text-center text-2xl font-bold text-gray-900 md:text-3xl">Benzer ürünler</h2>
+            <motion.div
+              variants={stagger}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
+            >
               {similar.map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}

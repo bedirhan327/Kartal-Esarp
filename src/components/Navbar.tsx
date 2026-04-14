@@ -8,9 +8,9 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const collections = [
-  { name: "Sinirli Uretim", href: "/koleksiyonlar/sinirli-uretim" },
+  { name: "Sınırlı üretim", href: "/koleksiyonlar/sinirli-uretim" },
   { name: "Jersey", href: "/koleksiyonlar/jersey" },
-  { name: "Sifon", href: "/koleksiyonlar/sifon" },
+  { name: "Şifon", href: "/koleksiyonlar/sifon" },
   { name: "Dokuma", href: "/koleksiyonlar/dokuma" },
   { name: "Saten", href: "/koleksiyonlar/saten" },
   { name: "Spor", href: "/koleksiyonlar/spor" },
@@ -19,9 +19,9 @@ const collections = [
 const navLinks = [
   { name: "Anasayfa", href: "/" },
   { name: "Yeni Gelenler", href: "/yeni-gelenler" },
-  { name: "Kumas Rehberi", href: "/kumas-rehberi" },
-  { name: "Hakkimizda", href: "/hakkimizda" },
-  { name: "Iletisim", href: "/iletisim" },
+  { name: "Kumaş rehberi", href: "/kumas-rehberi" },
+  { name: "Hakkımızda", href: "/hakkimizda" },
+  { name: "İletişim", href: "/iletisim" },
 ];
 
 export default function Navbar() {

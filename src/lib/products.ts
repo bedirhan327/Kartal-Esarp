@@ -1,3 +1,5 @@
+import { getProductOrderWhatsAppUrl } from "@/lib/whatsapp";
+
 export interface Product {
   id: number;
   name: string;
@@ -151,16 +153,6 @@ export function getSimilarProducts(product: Product, limit = 4): Product[] {
     .slice(0, limit);
 }
 
-/** uluslararası format (+ işareti olmadan), wa.me için */
-export const WHATSAPP_E164 = "905542400764";
-
-export function getWhatsAppUrl(prefillMessage?: string): string {
-  const base = `https://wa.me/${WHATSAPP_E164}`;
-  if (!prefillMessage?.trim()) return base;
-  return `${base}?text=${encodeURIComponent(prefillMessage)}`;
-}
-
 export function handleWhatsAppOrder(product: Product) {
-  const message = `Merhaba, "${product.name}" adlı ürününüz hakkında ilgileniyorum. Daha fazla ayrıntı alabilir miyim?`;
-  return getWhatsAppUrl(message);
+  return getProductOrderWhatsAppUrl(product.name);
 }

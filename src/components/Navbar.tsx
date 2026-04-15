@@ -30,6 +30,7 @@ const navLinks = [
   { name: "Anasayfa", href: "/" },
   { name: "Yeni Gelenler", href: "/yeni-gelenler" },
   { name: "Kumaş rehberi", href: "/kumas-rehberi" },
+  { name: "SSS", href: "/sss" },
   { name: "Hakkımızda", href: "/hakkimizda" },
   { name: "İletişim", href: "/iletisim" },
 ];

@@ -7,6 +7,7 @@ import { ChevronRight, MapPin, MessageCircle, Shield, Truck, Star, ArrowRight } 
 import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
 import { allProducts, getNewProducts, getLimitedProducts } from "@/lib/products";
+import { getWhatsAppTemplateUrl } from "@/lib/whatsapp";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -298,7 +299,7 @@ export default function Home() {
             <p className="mb-8 text-lg text-gray-600">
               Beğendiğiniz ürünü WhatsApp üzerinden tek tıkla sipariş edin. Hızlı yanıt, güvenli alışveriş.
             </p>
-            <a href="https://wa.me/905542400764" target="_blank" rel="noopener noreferrer">
+            <a href={getWhatsAppTemplateUrl("question")} target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="whatsapp-button rounded-full bg-green-500 px-10 py-6 text-base font-bold text-white shadow-xl hover:bg-green-600">
                 <MessageCircle className="mr-2 h-5 w-5" />
                 WhatsApp ile İletişime Geç

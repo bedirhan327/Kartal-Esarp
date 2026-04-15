@@ -10,6 +10,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/hakkimizda`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.5 },
     { url: `${BASE}/iletisim`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.5 },
     { url: `${BASE}/kumas-rehberi`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.6 },
+    { url: `${BASE}/sss`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.6 },
+    { url: `${BASE}/kargo-iade-degisim`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.6 },
+    { url: `${BASE}/gizlilik-kvkk`, lastModified: new Date(), changeFrequency: "monthly" as const, priority: 0.4 },
   ];
 
   const collections = ["ipek-esarp", "sal", "desenli", "geometrik", "lux", "sinirli-uretim"].map((slug) => ({

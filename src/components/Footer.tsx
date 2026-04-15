@@ -16,7 +16,10 @@ export default function Footer() {
               <Link href="/" className="block text-purple-200 hover:text-white transition-colors">Anasayfa</Link>
               <Link href="/yeni-gelenler" className="block text-purple-200 hover:text-white transition-colors">Yeni Gelenler</Link>
               <Link href="/kumas-rehberi" className="block text-purple-200 hover:text-white transition-colors">Kumaş rehberi</Link>
+              <Link href="/sss" className="block text-purple-200 hover:text-white transition-colors">SSS</Link>
               <Link href="/hakkimizda" className="block text-purple-200 hover:text-white transition-colors">Hakkımızda</Link>
+              <Link href="/kargo-iade-degisim" className="block text-purple-200 hover:text-white transition-colors">Kargo, İade ve Değişim</Link>
+              <Link href="/gizlilik-kvkk" className="block text-purple-200 hover:text-white transition-colors">Gizlilik & KVKK</Link>
             </div>
           </div>
           <div>

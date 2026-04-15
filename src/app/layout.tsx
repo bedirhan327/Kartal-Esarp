@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFAB from "@/components/WhatsAppFAB";
 import ScrollToTop from "@/components/ScrollToTop";
+import CookieBanner from "@/components/CookieBanner";
 import { CompareProvider } from "@/components/CompareBar";
 
 const poppins = Poppins({
@@ -47,6 +48,7 @@ export default function RootLayout({
           <Footer />
           <WhatsAppFAB />
           <ScrollToTop />
+          <CookieBanner />
         </CompareProvider>
         <Analytics />
       </body>

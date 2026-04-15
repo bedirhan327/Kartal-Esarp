@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Clock, MapPin, MessageCircle, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getWhatsAppUrl } from "@/lib/products";
+import { getWhatsAppTemplateUrl, getWhatsAppUrl } from "@/lib/whatsapp";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -115,6 +115,36 @@ export default function Iletisim() {
                   Hemen WhatsApp ile iletişime geçin
                 </Button>
               </a>
+
+              <div className="rounded-3xl bg-white p-5 shadow-lg">
+                <h4 className="mb-3 text-base font-semibold text-gray-900">Hazır WhatsApp mesajları</h4>
+                <div className="grid gap-2 sm:grid-cols-3">
+                  <a
+                    href={getWhatsAppTemplateUrl("order")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-xl border border-green-100 bg-green-50 px-3 py-2 text-center text-sm font-medium text-green-700 transition-colors hover:bg-green-100"
+                  >
+                    Sipariş başlat
+                  </a>
+                  <a
+                    href={getWhatsAppTemplateUrl("question")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-xl border border-green-100 bg-green-50 px-3 py-2 text-center text-sm font-medium text-green-700 transition-colors hover:bg-green-100"
+                  >
+                    Ürün sorusu
+                  </a>
+                  <a
+                    href={getWhatsAppTemplateUrl("address-update")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-xl border border-green-100 bg-green-50 px-3 py-2 text-center text-sm font-medium text-green-700 transition-colors hover:bg-green-100"
+                  >
+                    Adres güncelle
+                  </a>
+                </div>
+              </div>
 
               {/* Konum: Sebilerenler Caddesi — gömülü harita + Google Haritalar bağlantısı */}
               <div className="overflow-hidden rounded-3xl shadow-lg">

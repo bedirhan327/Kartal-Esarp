@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -21,19 +21,20 @@ export function trackView(productId: number) {
 }
 
 export default function RecentlyViewed({ excludeId }: { excludeId?: number }) {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
+  const products = useMemo(() => {
+    if (typeof window === "undefined") return [] as Product[];
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
+      if (!raw) return [];
       const ids: number[] = JSON.parse(raw);
       const items = ids
         .filter((id) => id !== excludeId)
         .map((id) => getProductById(id))
         .filter(Boolean) as Product[];
-      setProducts(items.slice(0, 6));
-    } catch {}
+      return items.slice(0, 6);
+    } catch {
+      return [];
+    }
   }, [excludeId]);
 
   if (products.length === 0) return null;

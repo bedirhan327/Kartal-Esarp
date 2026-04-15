@@ -17,52 +17,52 @@ interface CollectionConfig {
 
 const collections: Record<string, CollectionConfig> = {
   "sinirli-uretim": {
-    title: "Sınırlı üretim",
+    title: "Sınırlı Üretim",
     description: "Özel tasarım, sınırlı sayıda üretilen eşarp ve şallar",
     longDescription:
       "Sınırlı üretim koleksiyonumuz, özel tasarım desenleri ve premium kumaşlarla hazırlanan benzersiz parçalardan oluşur. Her model sınırlı sayıda üretilir ve tükendikten sonra yeniden üretilmez. Bu parçalara sahip olmak, tarzınızı benzersiz kılmanın en özel yoludur.",
     image: "/products/esarp-097.jpeg",
     isLimited: true,
   },
-  jersey: {
-    title: "Jersey koleksiyonu",
-    description: "Yumuşacık doku, gün boyu konfor",
+  "ipek-esarp": {
+    title: "İpek Eşarplar",
+    description: "%100 ipek twill, zamansız zarafet",
     longDescription:
-      "Jersey şallarımız, esnek ve yumuşak yapılarıyla günlük kullanımda en çok tercih edilen modellerimiz arasında. Kolay sarılır, buruşmaz ve cildi tahriş etmez. Her mevsim kullanıma uygun geniş renk yelpazemiz ile tarzınıza uygun modeli bulabilirsiniz.",
-    image: "/products/esarp-003.jpeg",
-    category: "jersey",
+      "İpek eşarp koleksiyonumuz, %100 saf ipek twill kumaştan üretilen 90x90 cm kare eşarplardan oluşur. İpek kumaşın doğal parlaklığı ve yumuşak dokusu, her kombini bir üst seviyeye taşır. Vakko, Armine, Aker, Belli ve Zerafetim gibi premium markalardan seçtiğimiz modeller, hem günlük hem de özel günlerde kullanıma uygundur.",
+    image: "/products/esarp-032.jpeg",
+    category: "ipek-esarp",
   },
-  sifon: {
-    title: "Şifon koleksiyonu",
-    description: "Hafiflik ve zarafetin buluşma noktası",
+  sal: {
+    title: "Şallar",
+    description: "Uzun boy, her mevsim kullanıma uygun",
     longDescription:
-      "Şifon eşarplarımız, hafif ve havadar dokusuyla özellikle ilkbahar-yaz aylarında öne çıkar. Zarif akışkanlığıyla hem günlük hem de özel günlerde kullanılabilir. Canlı renklerden pastel tonlara kadar geniş bir seçenekle sunulur.",
-    image: "/products/esarp-004.jpeg",
-    category: "sifon",
+      "Şal koleksiyonumuz; viskon, medine ipeği, pamuk-ipek karışım gibi yumuşak kumaşlardan üretilen 70x200 cm uzun boy modellerden oluşur. Kolay sarılır, hafif ve her mevsim kullanılabilir. Günlük kullanımdan özel günlere kadar tüm kombinlerinize sıcaklık ve şıklık katar.",
+    image: "/products/esarp-082.jpeg",
+    category: "sal",
   },
-  dokuma: {
-    title: "Dokuma koleksiyonu",
-    description: "Gelenekten ilham, modern yorumlar",
+  desenli: {
+    title: "Desenli Eşarplar",
+    description: "Çiçekli, botanik ve figürlü motifler",
     longDescription:
-      "Dokuma şallarımız, geleneksel el sanatlarına yapılan bir saygıdır. Zengin desenleri ve dayanıklı yapısıyla kışlık kullanıma idealdir. Her bir parçada doğal liflerin sıcaklığı ve el işinin estetiğini hissedebilirsiniz.",
-    image: "/products/esarp-006.jpeg",
-    category: "dokuma",
+      "Desenli eşarp koleksiyonumuz; çiçek buketi, botanik yaprak, tropikal meyve, sakayık ve figürlü motiflerle süslenmiş sanatsal parçalardan oluşur. Doğadan ilham alan bu tasarımlar, her birini benzersiz bir tablo gibi taşımanızı sağlar. Canlı renklerden sade pastel tonlara kadar geniş bir seçenek sunar.",
+    image: "/products/esarp-102.jpeg",
+    category: "desenli",
   },
-  saten: {
-    title: "Saten koleksiyonu",
-    description: "İpeksi his, premium görünüm",
+  geometrik: {
+    title: "Geometrik Eşarplar",
+    description: "Çizgili, kazayağı ve modern motifler",
     longDescription:
-      "Saten eşarplarımız, ipeksi parlaklığı ve kaygan dokusuyla lüks bir deneyim sunar. Işık altında zarif bir parıltıya sahip olan bu modeller, özel günler ve davetler için mükemmel bir tamamlayıcı. Her kombini bir üst seviyeye taşır.",
-    image: "/products/esarp-002.jpeg",
-    category: "saten",
+      "Geometrik eşarp koleksiyonumuz; chevron, kazayağı, puantiye, patchwork ve pop art gibi modern grafik motiflerle tasarlanmış parçalardan oluşur. Cesur çizgiler ve kontrast renklerle zamansız bir şıklık sunar. Hem klasik hem de modern tarza uyum sağlayan bu modeller, gardırobunuzun vazgeçilmezi olacak.",
+    image: "/products/esarp-100.jpeg",
+    category: "geometrik",
   },
-  spor: {
-    title: "Spor koleksiyon",
-    description: "Aktif yaşam için tasarlandı",
+  lux: {
+    title: "Lüks Koleksiyon",
+    description: "Premium marka, eşsiz kalite",
     longDescription:
-      "Spor koleksiyonumuz, aktif bir yaşam sürdürenler için tasarlandı. Nefes alan kumaşlar, pratik kesimler ve canlı renkler ile hareket halindeyken bile şıklığınızı koruyun. Yogadan yürüyüşe, alışverişten kahve molasına kadar her anınız için ideal.",
-    image: "/products/esarp-005.jpeg",
-    category: "spor",
+      "Lüks koleksiyonumuz, dünyanın en prestijli markalarından özenle seçilmiş premium ipek eşarplardan oluşur. Monogram detaylar, klasik ekose desenler ve zarif çiçek motifleriyle üst düzey şıklık. Her biri sınırlı sayıda sunulan bu parçalar, koleksiyonunuzun en değerli hazineleri olacak.",
+    image: "/products/esarp-073.jpeg",
+    category: "lux",
   },
 };
 
@@ -90,7 +90,6 @@ export default function CollectionPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100">
-      {/* Hero banner */}
       <section className="relative h-[40vh] w-full overflow-hidden md:h-[50vh]">
         <Image src={config.image} alt={config.title} fill priority className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-purple-900/80 to-pink-900/50" />
@@ -109,7 +108,6 @@ export default function CollectionPage() {
         </div>
       </section>
 
-      {/* About */}
       <section className="bg-white py-12">
         <div className="container mx-auto px-4">
           <motion.p
@@ -123,7 +121,6 @@ export default function CollectionPage() {
         </div>
       </section>
 
-      {/* Products */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <motion.div

@@ -22,11 +22,11 @@ export default function Footer() {
           <div>
             <h4 className="mb-4 font-bold">Koleksiyonlar</h4>
             <div className="space-y-2">
-              <Link href="/koleksiyonlar/jersey" className="block text-purple-200 hover:text-white transition-colors">Jersey</Link>
-              <Link href="/koleksiyonlar/sifon" className="block text-purple-200 hover:text-white transition-colors">Sifon</Link>
-              <Link href="/koleksiyonlar/dokuma" className="block text-purple-200 hover:text-white transition-colors">Dokuma</Link>
-              <Link href="/koleksiyonlar/saten" className="block text-purple-200 hover:text-white transition-colors">Saten</Link>
-              <Link href="/koleksiyonlar/spor" className="block text-purple-200 hover:text-white transition-colors">Spor</Link>
+              <Link href="/koleksiyonlar/ipek-esarp" className="block text-purple-200 hover:text-white transition-colors">İpek Eşarplar</Link>
+              <Link href="/koleksiyonlar/sal" className="block text-purple-200 hover:text-white transition-colors">Şallar</Link>
+              <Link href="/koleksiyonlar/desenli" className="block text-purple-200 hover:text-white transition-colors">Desenli Eşarplar</Link>
+              <Link href="/koleksiyonlar/geometrik" className="block text-purple-200 hover:text-white transition-colors">Geometrik Eşarplar</Link>
+              <Link href="/koleksiyonlar/lux" className="block text-purple-200 hover:text-white transition-colors">Lüks Koleksiyon</Link>
             </div>
           </div>
           <div>

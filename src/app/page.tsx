@@ -24,10 +24,10 @@ const itemFadeIn = {
 };
 
 const categories = [
-  { name: "Jersey Şallar", href: "/koleksiyonlar/jersey", image: "/products/esarp-082.jpeg", desc: "Günlük konfor" },
-  { name: "Şifon Eşarplar", href: "/koleksiyonlar/sifon", image: "/products/esarp-102.jpeg", desc: "Zarif hafiflik" },
-  { name: "Dokuma Serisi", href: "/koleksiyonlar/dokuma", image: "/products/esarp-031.jpeg", desc: "Geleneksel doku" },
-  { name: "Saten Eşarplar", href: "/koleksiyonlar/saten", image: "/products/esarp-100.jpeg", desc: "İpeksi parlaklık" },
+  { name: "İpek Eşarplar", href: "/koleksiyonlar/ipek-esarp", image: "/products/esarp-032.jpeg", desc: "Saf ipek zarafet" },
+  { name: "Şallar", href: "/koleksiyonlar/sal", image: "/products/esarp-082.jpeg", desc: "Her mevsim sıcaklık" },
+  { name: "Desenli Eşarplar", href: "/koleksiyonlar/desenli", image: "/products/esarp-102.jpeg", desc: "Çiçekli & botanik" },
+  { name: "Geometrik Eşarplar", href: "/koleksiyonlar/geometrik", image: "/products/esarp-100.jpeg", desc: "Modern çizgiler" },
 ];
 
 const brands = ["Vakko", "Armine", "Aker", "Vissona", "Belli", "Zerafetim"];
@@ -116,9 +116,9 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center gap-10 md:gap-16">
             {brands.map((brand) => (
-              <span key={brand} className="whitespace-nowrap text-lg font-bold tracking-widest text-gray-200 transition-colors duration-300 hover:text-purple-500 md:text-xl">
+              <Link key={brand} href={`/marka/${brand.toLowerCase()}`} className="whitespace-nowrap text-lg font-bold tracking-widest text-gray-200 transition-colors duration-300 hover:text-purple-500 md:text-xl">
                 {brand}
-              </span>
+              </Link>
             ))}
           </div>
         </div>

@@ -8,12 +8,21 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const collections = [
-  { name: "Sınırlı üretim", href: "/koleksiyonlar/sinirli-uretim" },
-  { name: "Jersey", href: "/koleksiyonlar/jersey" },
-  { name: "Şifon", href: "/koleksiyonlar/sifon" },
-  { name: "Dokuma", href: "/koleksiyonlar/dokuma" },
-  { name: "Saten", href: "/koleksiyonlar/saten" },
-  { name: "Spor", href: "/koleksiyonlar/spor" },
+  { name: "İpek Eşarplar", href: "/koleksiyonlar/ipek-esarp" },
+  { name: "Şallar", href: "/koleksiyonlar/sal" },
+  { name: "Desenli Eşarplar", href: "/koleksiyonlar/desenli" },
+  { name: "Geometrik Eşarplar", href: "/koleksiyonlar/geometrik" },
+  { name: "Lüks Koleksiyon", href: "/koleksiyonlar/lux" },
+  { name: "Sınırlı Üretim", href: "/koleksiyonlar/sinirli-uretim" },
+];
+
+const brands = [
+  { name: "Vakko", href: "/marka/vakko" },
+  { name: "Armine", href: "/marka/armine" },
+  { name: "Aker", href: "/marka/aker" },
+  { name: "Vissona", href: "/marka/vissona" },
+  { name: "Belli", href: "/marka/belli" },
+  { name: "Zerafetim", href: "/marka/zerafetim" },
 ];
 
 const navLinks = [
@@ -28,6 +37,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [isCollectionsOpen, setIsCollectionsOpen] = useState(false);
+  const [isBrandsOpen, setIsBrandsOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -39,6 +49,7 @@ export default function Navbar() {
   const closeMenu = useCallback(() => {
     setIsMenuOpen(false);
     setIsCollectionsOpen(false);
+    setIsBrandsOpen(false);
   }, []);
 
   return (
@@ -85,6 +96,26 @@ export default function Navbar() {
                   )}
                 >
                   {col.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div className="relative group">
+            <button className="flex items-center gap-1 text-sm font-semibold text-gray-700 transition-colors hover:text-purple-600">
+              Markalar <ChevronDown className="h-4 w-4" />
+            </button>
+            <div className="invisible absolute left-0 top-full mt-2 w-48 rounded-xl bg-white py-3 opacity-0 shadow-2xl border border-gray-200 transition-all duration-200 group-hover:visible group-hover:opacity-100">
+              {brands.map((b) => (
+                <Link
+                  key={b.href}
+                  href={b.href}
+                  className={cn(
+                    "block px-5 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-purple-50 hover:text-purple-600",
+                    pathname === b.href && "bg-purple-50 text-purple-600 font-semibold"
+                  )}
+                >
+                  {b.name}
                 </Link>
               ))}
             </div>
@@ -143,6 +174,32 @@ export default function Navbar() {
                       {collections.map((col) => (
                         <Link key={col.href} href={col.href} onClick={closeMenu} className={cn("rounded-lg py-2 px-3 text-sm font-medium text-gray-800 hover:bg-purple-50 hover:text-purple-600", pathname === col.href && "bg-purple-50 text-purple-600")}>
                           {col.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <button
+                onClick={() => setIsBrandsOpen(!isBrandsOpen)}
+                className="flex items-center justify-between rounded-lg py-2.5 px-3 text-base font-semibold text-gray-900 hover:bg-purple-50 hover:text-purple-600"
+              >
+                Markalar
+                <ChevronDown className={cn("h-4 w-4 transition-transform", isBrandsOpen && "rotate-180")} />
+              </button>
+              <AnimatePresence>
+                {isBrandsOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="flex flex-col gap-1 pl-4 pb-2">
+                      {brands.map((b) => (
+                        <Link key={b.href} href={b.href} onClick={closeMenu} className={cn("rounded-lg py-2 px-3 text-sm font-medium text-gray-800 hover:bg-purple-50 hover:text-purple-600", pathname === b.href && "bg-purple-50 text-purple-600")}>
+                          {b.name}
                         </Link>
                       ))}
                     </div>

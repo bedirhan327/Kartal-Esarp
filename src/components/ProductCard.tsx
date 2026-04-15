@@ -3,9 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { MessageCircle, Sparkles, Eye } from "lucide-react";
+import { MessageCircle, Sparkles, Eye, GitCompareArrows, Check } from "lucide-react";
 import type { Product } from "@/lib/products";
 import { handleWhatsAppOrder } from "@/lib/products";
+import { useCompare } from "@/components/CompareBar";
 
 const itemFadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -13,6 +14,9 @@ const itemFadeIn = {
 };
 
 export default function ProductCard({ product }: { product: Product }) {
+  const { add, remove, has } = useCompare();
+  const inCompare = has(product.id);
+
   return (
     <motion.div variants={itemFadeIn} whileHover={{ y: -6 }} className="group">
       <Link href={`/urun/${product.id}`} className="block">
@@ -36,6 +40,21 @@ export default function ProductCard({ product }: { product: Product }) {
               <Sparkles className="h-3 w-3" /> Sınırlı
             </span>
           )}
+
+          {/* Compare button (always visible, top-right if no limited badge) */}
+          <span
+            className={`absolute z-30 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full shadow-md backdrop-blur-sm transition-all ${
+              product.isLimited ? "top-12 right-3" : "top-3 right-3"
+            } ${inCompare ? "bg-purple-600 text-white" : "bg-white/80 text-gray-600 hover:bg-purple-100 hover:text-purple-600"}`}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              inCompare ? remove(product.id) : add(product);
+            }}
+            title={inCompare ? "Karşılaştırmadan çıkar" : "Karşılaştır"}
+          >
+            {inCompare ? <Check className="h-4 w-4" /> : <GitCompareArrows className="h-4 w-4" />}
+          </span>
 
           {/* Hover overlay gradient */}
           <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -62,7 +81,6 @@ export default function ProductCard({ product }: { product: Product }) {
               <span className="flex flex-1 items-center justify-center gap-1.5 rounded-full border border-white/30 bg-white/10 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20">
                 <Eye className="h-4 w-4" /> Detayı Gör
               </span>
-              {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
               <span
                 className="flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-full bg-green-500 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-green-600"
                 onClick={(e) => {

@@ -43,7 +43,12 @@ export default function Iletisim() {
                 {[
                   { icon: <Phone className="h-5 w-5" />, title: "Telefon", value: "+90 554 240 07 64", subtitle: "Hafta içi 09:00 - 18:00", href: "tel:+905542400764" },
                   { icon: <MessageCircle className="h-5 w-5" />, title: "WhatsApp", value: "+90 554 240 07 64", subtitle: "Her gün 09:00 - 22:00", href: "https://wa.me/905542400764" },
-                  { icon: <MapPin className="h-5 w-5" />, title: "Adres", value: "Kütahya Merkez, Türkiye", subtitle: "Showroom ziyareti için randevu alınız" },
+                  {
+                    icon: <MapPin className="h-5 w-5" />,
+                    title: "Adres",
+                    value: "Sebilerenler Caddesi, Alipaşa Mah., Merkez / Kütahya",
+                    subtitle: "Showroom ziyareti için randevu alınız",
+                  },
                   { icon: <Clock className="h-5 w-5" />, title: "Çalışma saatleri", value: "Pazartesi - Cumartesi", subtitle: "09:00 - 18:00" },
                 ].map((item) => {
                   const Wrapper = item.href ? "a" : "div";
@@ -111,19 +116,29 @@ export default function Iletisim() {
                 </Button>
               </a>
 
-              {/* Map placeholder */}
+              {/* Konum: Sebilerenler Caddesi — gömülü harita + Google Haritalar bağlantısı */}
               <div className="overflow-hidden rounded-3xl shadow-lg">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d97534.97106712!2d29.879!3d39.424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c9a1f5a93d0e1d%3A0x3f5e5b7a5a9c8e0!2sK%C3%BCtahya!5e0!3m2!1str!2str!4v1710000000000!5m2!1str!2str"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500!2d29.990145!3d39.421322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c9a1f5a93d0e1d%3A0x3f5e5b7a5a9c8e0!2sSebilerenler%20Caddesi%2C%20K%C3%BCtahya!5e0!3m2!1str!2str!4v1710000000000!5m2!1str!2str"
                   width="100%"
-                  height="250"
+                  height="280"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Kütahya harita"
+                  title="Sebilerenler Caddesi, Kütahya harita"
                 />
               </div>
+              <p className="text-center text-sm text-gray-500">
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Sebilerenler+Caddesi%2C+Alipa%C5%9Fa+Mah.%2C+43020+Merkez%2FK%C3%BCtahya"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-purple-600 underline underline-offset-2 hover:text-purple-800"
+                >
+                  Konumu Google Haritalar&apos;da aç
+                </a>
+              </p>
             </motion.div>
           </div>
         </div>

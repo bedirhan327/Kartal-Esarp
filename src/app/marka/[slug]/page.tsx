@@ -3,6 +3,9 @@
 import { notFound, useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import ProductCard from "@/components/ProductCard";
+import ProductFilters from "@/components/ProductFilters";
+import Breadcrumb from "@/components/Breadcrumb";
+import PageTransition from "@/components/PageTransition";
 import { getProductsByBrand } from "@/lib/products";
 
 const brandInfo: Record<string, { name: string; description: string }> = {
@@ -57,7 +60,9 @@ export default function BrandPage() {
   if (products.length === 0) return notFound();
 
   return (
+    <PageTransition>
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100">
+      <Breadcrumb items={[{ label: "Markalar" }, { label: info.name }]} />
       <section className="bg-gradient-to-r from-purple-600 to-pink-600 py-16">
         <div className="container mx-auto px-4 text-center">
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-4xl font-bold text-white md:text-6xl">
@@ -74,18 +79,23 @@ export default function BrandPage() {
 
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-          >
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </motion.div>
+          <ProductFilters products={products}>
+            {(filtered) => (
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                animate="visible"
+                className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+              >
+                {filtered.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </motion.div>
+            )}
+          </ProductFilters>
         </div>
       </section>
     </div>
+    </PageTransition>
   );
 }

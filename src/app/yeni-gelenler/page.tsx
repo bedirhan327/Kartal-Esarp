@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import ProductCard from "@/components/ProductCard";
+import ProductFilters from "@/components/ProductFilters";
 import { allProducts } from "@/lib/products";
 
 const staggerContainer = {
@@ -25,11 +26,15 @@ export default function YeniGelenler() {
 
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {allProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </motion.div>
+          <ProductFilters products={allProducts}>
+            {(filtered) => (
+              <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {filtered.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </motion.div>
+            )}
+          </ProductFilters>
         </div>
       </section>
     </div>

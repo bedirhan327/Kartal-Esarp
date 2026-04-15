@@ -4,6 +4,9 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import WhatsAppFAB from "@/components/WhatsAppFAB";
+import ScrollToTop from "@/components/ScrollToTop";
+import { CompareProvider } from "@/components/CompareBar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -13,18 +16,21 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: "Kartal Esarp | Zarafet ve Kalitenin Adresi",
-    template: "%s | Kartal Esarp",
+    default: "Kartal Eşarp | Zarafet ve Kalitenin Adresi",
+    template: "%s | Kartal Eşarp",
   },
   description:
-    "Kartal Eşarp - Kütahya'dan Türkiye'nin dört bir yanına premium eşarp ve şal koleksiyonu. Jersey, şifon, dokuma ve saten modellerini keşfedin.",
-  keywords: ["eşarp", "şal", "jersey şal", "şifon eşarp", "saten eşarp", "dokuma şal", "kartal eşarp", "kütahya"],
+    "Kartal Eşarp - Kütahya'dan Türkiye'nin dört bir yanına premium eşarp ve şal koleksiyonu. İpek eşarp, şal, desenli ve geometrik modelleri keşfedin.",
+  keywords: ["eşarp", "şal", "ipek eşarp", "desenli eşarp", "geometrik eşarp", "kartal eşarp", "kütahya", "vakko", "armine", "zerafetim"],
   openGraph: {
-    title: "Kartal Esarp | Zarafet ve Kalitenin Adresi",
+    title: "Kartal Eşarp | Zarafet ve Kalitenin Adresi",
     description: "Premium eşarp ve şal koleksiyonu. Kütahya'dan Türkiye'nin dört bir yanına.",
     type: "website",
     locale: "tr_TR",
+    siteName: "Kartal Eşarp",
   },
+  metadataBase: new URL("https://kartal-esarp.vercel.app"),
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
@@ -35,9 +41,13 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`${poppins.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-[var(--font-poppins)]">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <CompareProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <WhatsAppFAB />
+          <ScrollToTop />
+        </CompareProvider>
         <Analytics />
       </body>
     </html>

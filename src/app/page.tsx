@@ -178,7 +178,7 @@ export default function Home() {
           <div className="grid gap-6 md:grid-cols-4">
             {[
               { icon: <Truck className="h-6 w-6" />, title: "Hızlı Gönderim", desc: "1-3 iş günü içinde kargoda" },
-              { icon: <MapPin className="h-6 w-6" />, title: "Kütahya Merkez", desc: "Özenle paketlenir ve gönderilir" },
+              { icon: <MapPin className="h-6 w-6" />, title: "Sebilerenler Caddesi, Kütahya", desc: "Merkezimiz Kütahya; siparişler özenle paketlenir" },
               { icon: <MessageCircle className="h-6 w-6" />, title: "WhatsApp Sipariş", desc: "Tek tıkla kolay ve hızlı sipariş" },
               { icon: <Shield className="h-6 w-6" />, title: "Kalite Garantisi", desc: "Premium kumaş ve işçilik" },
             ].map((feature, i) => (

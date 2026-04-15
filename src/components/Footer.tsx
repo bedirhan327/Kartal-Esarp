@@ -34,7 +34,7 @@ export default function Footer() {
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <MapPin className="h-5 w-5 shrink-0 text-purple-300" />
-                <span className="text-purple-200 text-sm">Kütahya, Türkiye</span>
+                <span className="text-purple-200 text-sm">Sebilerenler Caddesi, Kütahya</span>
               </div>
               <a href="tel:+905542400764" className="flex items-center gap-3 transition-colors hover:text-white">
                 <Phone className="h-5 w-5 shrink-0 text-purple-300" />

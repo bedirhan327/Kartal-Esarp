@@ -2,13 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { MessageCircle, Sparkles, Eye, GitCompareArrows, Check } from "lucide-react";
 import type { Product } from "@/lib/products";
 import { handleWhatsAppOrder } from "@/lib/products";
 import { useCompare } from "@/components/CompareBar";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/context/LocaleContext";
+import { localizeProduct } from "@/lib/i18n/localizeProduct";
 
 const itemFadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -16,9 +18,12 @@ const itemFadeIn = {
 };
 
 export default function ProductCard({ product }: { product: Product }) {
+  const { locale, t } = useLocale();
   const { add, remove, has } = useCompare();
   const inCompare = has(product.id);
   const [mobileExpanded, setMobileExpanded] = useState(false);
+  const display = useMemo(() => localizeProduct(product, locale), [product, locale]);
+  const priceLocale = locale === "en" ? "en-US" : "tr-TR";
 
   const resetMobileExpanded = useCallback(() => {
     if (typeof window !== "undefined" && window.matchMedia("(min-width: 1024px)").matches) {
@@ -35,34 +40,31 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <motion.div variants={itemFadeIn} whileHover={{ y: -6 }} className="group">
       <div className="relative block aspect-[3/4] overflow-hidden rounded-2xl shadow-md transition-shadow hover:shadow-xl">
-        {/* Masaüstü: karta tıklanınca ürün sayfası */}
         <Link
           href={`/urun/${product.id}`}
           className="absolute inset-0 z-[5] hidden lg:block"
-          aria-label={`${product.name} ürün detayı`}
+          aria-label={`${display.name} — ${t.productCard.productAria}`}
         />
 
         <Image
           src={product.image}
-          alt={product.name}
+          alt={display.name}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-110"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
 
-        {/* Badges */}
         {product.isNew && (
           <span className="pointer-events-none absolute top-3 left-3 z-20 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-gray-900 shadow-md backdrop-blur-sm">
-            YENİ
+            {t.productCard.new}
           </span>
         )}
         {product.isLimited && (
           <span className="pointer-events-none absolute top-3 right-3 z-20 flex items-center gap-1 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-amber-600 shadow-md backdrop-blur-sm">
-            <Sparkles className="h-3 w-3" /> Sınırlı
+            <Sparkles className="h-3 w-3" /> {t.productCard.limited}
           </span>
         )}
 
-        {/* Hover overlay gradient — masaüstü hover / mobil tek dokunuş */}
         <div
           className={cn(
             "pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100",
@@ -70,33 +72,31 @@ export default function ProductCard({ product }: { product: Product }) {
           )}
         />
 
-        {/* Varsayılan alt bilgi — hover’da / mobilde detay açıkken kaybolur */}
         <div
           className={cn(
             "pointer-events-none absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-black/70 to-transparent p-4 transition-opacity duration-300 group-hover:opacity-0",
             mobileExpanded && "max-lg:opacity-0",
           )}
         >
-          <p className="text-xs font-medium text-white/70">{product.brand}</p>
-          <p className="text-base font-bold text-white">{product.price.toLocaleString("tr-TR")} TL</p>
+          <p className="text-xs font-medium text-white/70">{display.brand}</p>
+          <p className="text-base font-bold text-white">{display.price.toLocaleString(priceLocale)} TL</p>
         </div>
 
-        {/* Hover / mobil detay bloğu */}
         <div
           className={cn(
-            "absolute bottom-0 left-0 right-0 z-20 translate-y-4 p-5 opacity-0 transition-all duration-500 pointer-events-none group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100",
+            "pointer-events-none absolute bottom-0 left-0 right-0 z-20 translate-y-4 p-5 opacity-0 transition-all duration-500 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100",
             mobileExpanded && "max-lg:pointer-events-auto max-lg:translate-y-0 max-lg:opacity-100",
           )}
         >
           <p className="mb-1 text-xs font-bold uppercase tracking-wider text-white/60">
-            {product.brand} &middot; {product.material}
+            {display.brand} &middot; {display.material}
           </p>
-          <h3 className="mb-1.5 text-base font-bold leading-snug text-white">{product.name}</h3>
-          <p className="mb-3 line-clamp-2 text-sm leading-relaxed text-white/60">{product.description}</p>
+          <h3 className="mb-1.5 text-base font-bold leading-snug text-white">{display.name}</h3>
+          <p className="mb-3 line-clamp-2 text-sm leading-relaxed text-white/60">{display.description}</p>
           <div className="mb-4 flex items-center gap-3">
-            <span className="text-xl font-bold text-white">{product.price.toLocaleString("tr-TR")} TL</span>
+            <span className="text-xl font-bold text-white">{display.price.toLocaleString(priceLocale)} TL</span>
             {product.oldPrice && (
-              <span className="text-sm text-white/40 line-through">{product.oldPrice.toLocaleString("tr-TR")} TL</span>
+              <span className="text-sm text-white/40 line-through">{product.oldPrice.toLocaleString(priceLocale)} TL</span>
             )}
             {product.oldPrice && (
               <span className="rounded-full bg-red-500/80 px-2 py-0.5 text-xs font-bold text-white">
@@ -111,7 +111,7 @@ export default function ProductCard({ product }: { product: Product }) {
               className="flex flex-1 items-center justify-center gap-1.5 rounded-full border border-white/30 bg-white/10 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20"
               onClick={(e) => e.stopPropagation()}
             >
-              <Eye className="h-4 w-4" /> Detayı Gör
+              <Eye className="h-4 w-4" /> {t.productCard.viewDetails}
             </Link>
             <span
               data-action
@@ -122,33 +122,30 @@ export default function ProductCard({ product }: { product: Product }) {
                 window.open(handleWhatsAppOrder(product), "_blank", "noopener,noreferrer");
               }}
             >
-              <MessageCircle className="h-4 w-4" /> Sipariş Ver
+              <MessageCircle className="h-4 w-4" /> {t.productCard.order}
             </span>
           </div>
         </div>
 
-        {/* Mobil: kapalıyken dokununca detayı aç */}
         {!mobileExpanded && (
           <button
             type="button"
             aria-expanded={false}
-            aria-label="Ürün detaylarını göster"
+            aria-label={t.productCard.showOverlay}
             className="absolute inset-0 z-[25] cursor-pointer lg:hidden"
             onClick={() => setMobileExpanded(true)}
           />
         )}
-        {/* Mobil: açıkken üst bölgeye dokununca kapat (butonlar altta) */}
         {mobileExpanded && (
           <button
             type="button"
             aria-expanded
-            aria-label="Ürün özetini göster"
+            aria-label={t.productCard.hideOverlay}
             className="absolute inset-x-0 top-0 z-[25] h-[52%] cursor-pointer lg:hidden"
             onClick={() => setMobileExpanded(false)}
           />
         )}
 
-        {/* Compare — her zaman üstte */}
         <span
           data-compare
           className={cn(
@@ -165,7 +162,7 @@ export default function ProductCard({ product }: { product: Product }) {
               add(product);
             }
           }}
-          title={inCompare ? "Karşılaştırmadan çıkar" : "Karşılaştır"}
+          title={inCompare ? t.compare.removeTitle : t.compare.addTitle}
         >
           {inCompare ? <Check className="h-4 w-4" /> : <GitCompareArrows className="h-4 w-4" />}
         </span>

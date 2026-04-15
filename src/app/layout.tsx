@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import WhatsAppFAB from "@/components/WhatsAppFAB";
 import ScrollToTop from "@/components/ScrollToTop";
 import CookieBanner from "@/components/CookieBanner";
-import { CompareProvider } from "@/components/CompareBar";
+import { Providers } from "@/components/Providers";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -40,16 +40,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr" className={`${poppins.variable} h-full antialiased`}>
+    <html lang="tr" suppressHydrationWarning className={`${poppins.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-[var(--font-poppins)]">
-        <CompareProvider>
+        <Providers>
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
           <WhatsAppFAB />
           <ScrollToTop />
           <CookieBanner />
-        </CompareProvider>
+        </Providers>
         <Analytics />
       </body>
     </html>

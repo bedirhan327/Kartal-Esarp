@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useCallback } from "react";
+import { useLocale } from "@/context/LocaleContext";
 import Image from "next/image";
 import Link from "next/link";
 import { X, GitCompareArrows } from "lucide-react";
@@ -56,6 +57,7 @@ export function CompareProvider({ children }: { children: React.ReactNode }) {
 
 function CompareBarUI() {
   const { items, remove, clear } = useCompare();
+  const { t } = useLocale();
 
   if (items.length === 0) return null;
 
@@ -70,7 +72,9 @@ function CompareBarUI() {
         <div className="container mx-auto flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <GitCompareArrows className="h-5 w-5 text-purple-600" />
-            <span className="text-sm font-semibold text-gray-700">{items.length}/3 ürün seçili</span>
+            <span className="text-sm font-semibold text-gray-700">
+              {items.length}/3 {t.compare.selected}
+            </span>
           </div>
 
           <div className="flex items-center gap-3">
@@ -90,15 +94,15 @@ function CompareBarUI() {
           </div>
 
           <div className="flex items-center gap-2">
-            <button onClick={clear} className="rounded-full px-4 py-2 text-sm text-gray-500 transition-colors hover:bg-gray-100">
-              Temizle
+            <button type="button" onClick={clear} className="rounded-full px-4 py-2 text-sm text-gray-500 transition-colors hover:bg-gray-100">
+              {t.compare.clear}
             </button>
             {items.length >= 2 && (
               <Link
                 href={`/karsilastir?ids=${items.map((p) => p.id).join(",")}`}
                 className="rounded-full bg-purple-600 px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-purple-700"
               >
-                Karşılaştır
+                {t.compare.compare}
               </Link>
             )}
           </div>

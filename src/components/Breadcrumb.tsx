@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
+import { useLocale } from "@/context/LocaleContext";
 
 interface BreadcrumbItem {
   label: string;
@@ -7,11 +10,13 @@ interface BreadcrumbItem {
 }
 
 export default function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
+  const { t } = useLocale();
+
   return (
-    <div className="bg-white border-b border-gray-100">
+    <div className="border-b border-gray-100 bg-white">
       <div className="container mx-auto px-4 py-3">
         <nav className="flex items-center gap-1.5 text-sm">
-          <Link href="/" className="flex items-center gap-1 text-gray-400 transition-colors hover:text-purple-600">
+          <Link href="/" className="flex items-center gap-1 text-gray-400 transition-colors hover:text-purple-600" aria-label={t.breadcrumb.homeAria}>
             <Home className="h-3.5 w-3.5" />
           </Link>
           {items.map((item, i) => (
@@ -22,7 +27,7 @@ export default function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
                   {item.label}
                 </Link>
               ) : (
-                <span className="font-medium text-gray-900 truncate max-w-[200px]">{item.label}</span>
+                <span className="max-w-[200px] truncate font-medium text-gray-900">{item.label}</span>
               )}
             </span>
           ))}

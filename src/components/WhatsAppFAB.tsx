@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 import { MessageCircle, MapPin, PackageCheck, HelpCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getWhatsAppTemplateUrl } from "@/lib/whatsapp";
+import { useLocale } from "@/context/LocaleContext";
 
 export default function WhatsAppFAB() {
+  const { t } = useLocale();
   const [visible, setVisible] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -33,9 +35,7 @@ export default function WhatsAppFAB() {
                 exit={{ opacity: 0, y: 8 }}
                 className="mb-3 w-72 rounded-2xl border border-green-100 bg-white p-3 shadow-2xl"
               >
-                <p className="px-2 pb-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
-                  Hazır WhatsApp Mesajları
-                </p>
+                <p className="px-2 pb-2 text-xs font-semibold uppercase tracking-wide text-gray-500">{t.whatsappFab.title}</p>
                 <div className="space-y-2">
                   <a
                     href={getWhatsAppTemplateUrl("order")}
@@ -44,7 +44,7 @@ export default function WhatsAppFAB() {
                     className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-green-50"
                   >
                     <PackageCheck className="h-4 w-4 text-green-600" />
-                    Sipariş başlat
+                    {t.whatsappFab.order}
                   </a>
                   <a
                     href={getWhatsAppTemplateUrl("question")}
@@ -53,7 +53,7 @@ export default function WhatsAppFAB() {
                     className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-green-50"
                   >
                     <HelpCircle className="h-4 w-4 text-green-600" />
-                    Ürün hakkında soru sor
+                    {t.whatsappFab.question}
                   </a>
                   <a
                     href={getWhatsAppTemplateUrl("address-update")}
@@ -62,7 +62,7 @@ export default function WhatsAppFAB() {
                     className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-green-50"
                   >
                     <MapPin className="h-4 w-4 text-green-600" />
-                    Adres güncelleme bildir
+                    {t.whatsappFab.address}
                   </a>
                 </div>
               </motion.div>
@@ -73,7 +73,7 @@ export default function WhatsAppFAB() {
             type="button"
             onClick={() => setOpen((prev) => !prev)}
             className="whatsapp-button flex h-14 w-14 items-center justify-center rounded-full bg-green-500 text-white shadow-lg transition-transform hover:scale-110 hover:bg-green-600"
-            aria-label="WhatsApp seçeneklerini aç"
+            aria-label={t.whatsappFab.aria}
           >
             <MessageCircle className="h-7 w-7" />
           </button>

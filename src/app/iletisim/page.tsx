@@ -41,22 +41,26 @@ export default function Iletisim() {
 
               <div className="space-y-4">
                 {[
-                  { icon: <Phone className="h-5 w-5" />, title: "Telefon", value: "+90 554 240 07 64", subtitle: "Hafta içi 09:00 - 18:00" },
-                  { icon: <MessageCircle className="h-5 w-5" />, title: "WhatsApp", value: "+90 554 240 07 64", subtitle: "Her gün 09:00 - 22:00" },
+                  { icon: <Phone className="h-5 w-5" />, title: "Telefon", value: "+90 554 240 07 64", subtitle: "Hafta içi 09:00 - 18:00", href: "tel:+905542400764" },
+                  { icon: <MessageCircle className="h-5 w-5" />, title: "WhatsApp", value: "+90 554 240 07 64", subtitle: "Her gün 09:00 - 22:00", href: "https://wa.me/905542400764" },
                   { icon: <MapPin className="h-5 w-5" />, title: "Adres", value: "Kütahya Merkez, Türkiye", subtitle: "Showroom ziyareti için randevu alınız" },
                   { icon: <Clock className="h-5 w-5" />, title: "Çalışma saatleri", value: "Pazartesi - Cumartesi", subtitle: "09:00 - 18:00" },
-                ].map((item) => (
-                  <div key={item.title} className="flex items-start gap-4 rounded-2xl bg-white p-5 shadow-sm hover:shadow-md transition-shadow">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-100 to-pink-100 text-purple-600">
-                      {item.icon}
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900">{item.title}</h3>
-                      <p className="text-sm font-medium text-purple-600">{item.value}</p>
-                      <p className="text-xs text-gray-400">{item.subtitle}</p>
-                    </div>
-                  </div>
-                ))}
+                ].map((item) => {
+                  const Wrapper = item.href ? "a" : "div";
+                  const wrapperProps = item.href ? { href: item.href, target: item.href.startsWith("http") ? "_blank" : undefined, rel: item.href.startsWith("http") ? "noopener noreferrer" : undefined } : {};
+                  return (
+                    <Wrapper key={item.title} {...wrapperProps} className="flex items-start gap-4 rounded-2xl bg-white p-5 shadow-sm hover:shadow-md transition-shadow">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-100 to-pink-100 text-purple-600">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-900">{item.title}</h3>
+                        <p className="text-sm font-medium text-purple-600">{item.value}</p>
+                        <p className="text-xs text-gray-400">{item.subtitle}</p>
+                      </div>
+                    </Wrapper>
+                  );
+                })}
               </div>
             </motion.div>
 

@@ -38,8 +38,8 @@ export default function ProductCard({ product }: { product: Product }) {
   }, [resetMobileExpanded]);
 
   return (
-    <motion.div variants={itemFadeIn} whileHover={{ y: -6 }} className="group">
-      <div className="relative block aspect-[3/4] overflow-hidden rounded-2xl shadow-md transition-shadow hover:shadow-xl">
+    <motion.div variants={itemFadeIn} whileHover={{ y: -6 }} className="group min-w-0 @container">
+      <div className="relative block aspect-[3/4] w-full min-w-0 overflow-hidden rounded-2xl shadow-md transition-shadow hover:shadow-xl">
         <Link
           href={`/urun/${product.id}`}
           className="absolute inset-0 z-[5] hidden lg:block"
@@ -84,45 +84,52 @@ export default function ProductCard({ product }: { product: Product }) {
 
         <div
           className={cn(
-            "pointer-events-none absolute bottom-0 left-0 right-0 z-20 translate-y-4 p-5 opacity-0 transition-all duration-500 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100",
+            "pointer-events-none absolute bottom-0 left-0 right-0 z-20 translate-y-4 p-3 opacity-0 transition-all duration-500 @min-[360px]:p-4 @min-[420px]:p-5 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100",
             mobileExpanded && "max-lg:pointer-events-auto max-lg:translate-y-0 max-lg:opacity-100",
           )}
         >
-          <p className="mb-1 text-xs font-bold uppercase tracking-wider text-white/60">
+          <p className="mb-1 text-[10px] font-bold uppercase leading-tight tracking-wider text-white/60 @min-[360px]:text-xs">
             {display.brand} &middot; {display.material}
           </p>
-          <h3 className="mb-1.5 text-base font-bold leading-snug text-white">{display.name}</h3>
-          <p className="mb-3 line-clamp-2 text-sm leading-relaxed text-white/60">{display.description}</p>
-          <div className="mb-4 flex items-center gap-3">
-            <span className="text-xl font-bold text-white">{display.price.toLocaleString(priceLocale)} TL</span>
+          <h3 className="mb-1.5 text-sm font-bold leading-snug text-white @min-[360px]:text-base">{display.name}</h3>
+          <p className="mb-3 line-clamp-2 text-xs leading-relaxed text-white/60 @min-[360px]:text-sm">{display.description}</p>
+          <div className="mb-3 flex w-full min-w-0 flex-wrap items-center gap-x-2 gap-y-1.5 @min-[360px]:mb-4 @min-[360px]:gap-x-3">
+            <span className="text-base font-bold tabular-nums text-white @min-[360px]:text-lg @min-[420px]:text-xl">
+              {display.price.toLocaleString(priceLocale)} TL
+            </span>
             {product.oldPrice && (
-              <span className="text-sm text-white/40 line-through">{product.oldPrice.toLocaleString(priceLocale)} TL</span>
+              <span className="shrink-0 text-xs text-white/40 line-through @min-[360px]:text-sm">
+                {product.oldPrice.toLocaleString(priceLocale)} TL
+              </span>
             )}
             {product.oldPrice && (
-              <span className="rounded-full bg-red-500/80 px-2 py-0.5 text-xs font-bold text-white">
+              <span className="shrink-0 rounded-full bg-red-500/80 px-2 py-0.5 text-[10px] font-bold text-white @min-[360px]:text-xs">
                 -%{Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)}
               </span>
             )}
           </div>
-          <div data-action className="relative z-30 flex gap-2">
+          <div
+            data-action
+            className="relative z-30 flex w-full min-w-0 flex-col gap-2 @min-[340px]:flex-row @min-[340px]:gap-2"
+          >
             <Link
               href={`/urun/${product.id}`}
               data-action
-              className="flex flex-1 items-center justify-center gap-1.5 rounded-full border border-white/30 bg-white/10 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+              className="flex min-h-[44px] w-full min-w-0 items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-2.5 text-xs font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 @min-[340px]:flex-1 @min-[360px]:text-sm"
               onClick={(e) => e.stopPropagation()}
             >
-              <Eye className="h-4 w-4" /> {t.productCard.viewDetails}
+              <Eye className="h-4 w-4 shrink-0" /> <span className="truncate">{t.productCard.viewDetails}</span>
             </Link>
             <span
               data-action
-              className="flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-full bg-green-500 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-green-600"
+              className="flex min-h-[44px] w-full min-w-0 cursor-pointer items-center justify-center gap-2 rounded-full bg-green-500 px-3 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-green-600 @min-[340px]:flex-1 @min-[360px]:text-sm"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 window.open(handleWhatsAppOrder(product), "_blank", "noopener,noreferrer");
               }}
             >
-              <MessageCircle className="h-4 w-4" /> {t.productCard.order}
+              <MessageCircle className="h-4 w-4 shrink-0" /> <span className="truncate">{t.productCard.order}</span>
             </span>
           </div>
         </div>

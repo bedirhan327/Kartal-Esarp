@@ -131,13 +131,20 @@ export default function Home() {
 
       <section className="border-b border-gray-100 bg-white py-6">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center gap-10 md:gap-16">
+          <nav
+            aria-label={t.nav.brands}
+            className="-mx-4 flex max-md:snap-x max-md:snap-mandatory flex-nowrap items-center gap-x-8 overflow-x-auto overflow-y-hidden px-4 py-1 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] md:mx-0 md:flex-nowrap md:justify-center md:gap-10 md:overflow-x-visible md:px-0 md:py-0 md:snap-none lg:gap-16 [&::-webkit-scrollbar]:hidden"
+          >
             {brands.map((brand) => (
-              <Link key={brand} href={`/marka/${brand.toLowerCase()}`} className="whitespace-nowrap text-lg font-bold tracking-widest text-gray-200 transition-colors duration-300 hover:text-purple-500 md:text-xl">
+              <Link
+                key={brand}
+                href={`/marka/${brand.toLowerCase()}`}
+                className="max-md:snap-start shrink-0 whitespace-nowrap text-lg font-bold tracking-widest text-gray-200 transition-colors duration-300 hover:text-purple-500 md:snap-normal md:text-xl"
+              >
                 {brand}
               </Link>
             ))}
-          </div>
+          </nav>
         </div>
       </section>
 

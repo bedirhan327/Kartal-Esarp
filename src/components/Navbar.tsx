@@ -4,28 +4,60 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, ChevronRight, Menu, X, Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import SearchModal from "@/components/SearchModal";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useLocale } from "@/context/LocaleContext";
+import { useWishlist } from "@/context/WishlistContext";
 
-const collectionEntries = [
-  { slug: "ipek-esarp", href: "/koleksiyonlar/ipek-esarp" },
+type CollectionChild = { slug: CollectionNavSlug; href: string };
+type CollectionEntry = { slug: CollectionNavSlug; href: string; children?: CollectionChild[] };
+
+type CollectionNavSlug =
+  | "ipek-esarp"
+  | "sal"
+  | "desenli"
+  | "geometrik"
+  | "lux"
+  | "sinirli-uretim"
+  | "esarp"
+  | "esarp-tumu"
+  | "esarp-twill-ipek"
+  | "esarp-yun-ipek"
+  | "esarp-pamuklu-ipek"
+  | "esarp-viskon"
+  | "esarp-cocuk"
+  | "esarp-bandana";
+
+const collectionEntries: CollectionEntry[] = [
+  {
+    slug: "esarp",
+    href: "/koleksiyonlar/ipek-esarp",
+    children: [
+      { slug: "esarp-tumu", href: "/koleksiyonlar/ipek-esarp" },
+      { slug: "esarp-twill-ipek", href: "/koleksiyonlar/esarp-twill-ipek" },
+      { slug: "esarp-yun-ipek", href: "/koleksiyonlar/esarp-yun-ipek" },
+      { slug: "esarp-pamuklu-ipek", href: "/koleksiyonlar/esarp-pamuklu-ipek" },
+      { slug: "esarp-viskon", href: "/koleksiyonlar/esarp-viskon" },
+      { slug: "esarp-cocuk", href: "/koleksiyonlar/esarp-cocuk" },
+      { slug: "esarp-bandana", href: "/koleksiyonlar/esarp-bandana" },
+    ],
+  },
   { slug: "sal", href: "/koleksiyonlar/sal" },
   { slug: "desenli", href: "/koleksiyonlar/desenli" },
   { slug: "geometrik", href: "/koleksiyonlar/geometrik" },
   { slug: "lux", href: "/koleksiyonlar/lux" },
   { slug: "sinirli-uretim", href: "/koleksiyonlar/sinirli-uretim" },
-] as const;
+];
 
 const brandEntries = [
+  { name: "Zerafetim", href: "/marka/zerafetim" },
   { name: "Vakko", href: "/marka/vakko" },
   { name: "Armine", href: "/marka/armine" },
   { name: "Aker", href: "/marka/aker" },
   { name: "Vissona", href: "/marka/vissona" },
   { name: "Belli", href: "/marka/belli" },
-  { name: "Zerafetim", href: "/marka/zerafetim" },
 ];
 
 const navEntries: { href: string; label: "home" | "newArrivals" | "fabricGuide" | "faq" | "about" | "contact" }[] = [
@@ -39,9 +71,11 @@ const navEntries: { href: string; label: "home" | "newArrivals" | "fabricGuide" 
 
 export default function Navbar() {
   const { t } = useLocale();
+  const { count: wishlistCount } = useWishlist();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [isCollectionsOpen, setIsCollectionsOpen] = useState(false);
+  const [isEsarpOpen, setIsEsarpOpen] = useState(false);
   const [isBrandsOpen, setIsBrandsOpen] = useState(false);
   const pathname = usePathname();
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -55,6 +89,7 @@ export default function Navbar() {
   const closeMenu = useCallback(() => {
     setIsMenuOpen(false);
     setIsCollectionsOpen(false);
+    setIsEsarpOpen(false);
     setIsBrandsOpen(false);
   }, []);
 
@@ -136,18 +171,48 @@ export default function Navbar() {
                 {t.nav.collections} <ChevronDown className="h-4 w-4" />
               </button>
               <div className="invisible absolute left-0 top-full mt-2 w-56 rounded-xl border border-gray-200 bg-white py-3 opacity-0 shadow-2xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
-                {collectionEntries.map((col) => (
-                  <Link
-                    key={col.href}
-                    href={col.href}
-                    className={cn(
-                      "block px-5 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-purple-50 hover:text-purple-600",
-                      pathname === col.href && "bg-purple-50 font-semibold text-purple-600",
-                    )}
-                  >
-                    {t.collectionNav[col.slug]}
-                  </Link>
-                ))}
+                {collectionEntries.map((col) =>
+                  col.children ? (
+                    <div key={col.slug} className="group/sub relative">
+                      <Link
+                        href={col.href}
+                        className={cn(
+                          "flex items-center justify-between px-5 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-purple-50 hover:text-purple-600",
+                          pathname === col.href && "bg-purple-50 font-semibold text-purple-600",
+                        )}
+                      >
+                        <span>{t.collectionNav[col.slug]}</span>
+                        <ChevronRight className="h-4 w-4 text-gray-400" />
+                      </Link>
+                      <div className="invisible absolute left-full top-0 ml-1 w-60 rounded-xl border border-gray-200 bg-white py-3 opacity-0 shadow-2xl transition-all duration-200 group-hover/sub:visible group-hover/sub:opacity-100">
+                        {col.children.map((child) => (
+                          <Link
+                            key={child.slug}
+                            href={child.href}
+                            className={cn(
+                              "block px-5 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-purple-50 hover:text-purple-600",
+                              child.slug === "esarp-tumu" && "border-b border-gray-100 font-semibold",
+                              pathname === child.href && "bg-purple-50 font-semibold text-purple-600",
+                            )}
+                          >
+                            {t.collectionNav[child.slug]}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <Link
+                      key={col.slug}
+                      href={col.href}
+                      className={cn(
+                        "block px-5 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-purple-50 hover:text-purple-600",
+                        pathname === col.href && "bg-purple-50 font-semibold text-purple-600",
+                      )}
+                    >
+                      {t.collectionNav[col.slug]}
+                    </Link>
+                  ),
+                )}
               </div>
             </div>
 
@@ -187,10 +252,30 @@ export default function Navbar() {
               </Link>
             ))}
 
+            <Link href="/favoriler" aria-label={t.wishlist.navTitle} className="relative shrink-0 text-gray-600 transition-colors hover:text-pink-500">
+              <Heart className={cn("h-5 w-5", wishlistCount > 0 && "fill-pink-500 text-pink-500")} />
+              {wishlistCount > 0 && (
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-pink-500 text-[10px] font-bold text-white"
+                >
+                  {wishlistCount}
+                </motion.span>
+              )}
+            </Link>
             <LanguageSwitcher className="shrink-0" />
           </nav>
 
           <div data-mobile-nav-ignore className="ml-auto flex shrink-0 items-center gap-2 lg:hidden">
+            <Link href="/favoriler" aria-label={t.wishlist.navTitle} className="relative text-gray-600 hover:text-pink-500">
+              <Heart className={cn("h-5 w-5", wishlistCount > 0 && "fill-pink-500 text-pink-500")} />
+              {wishlistCount > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-pink-500 text-[10px] font-bold text-white">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
             <LanguageSwitcher />
             <button type="button" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label={t.nav.menu}>
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -198,7 +283,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        <div className="border-t border-gray-50 px-4 py-2 lg:hidden">
+        <div className="min-w-0 border-t border-gray-50 px-4 py-2 lg:hidden">
           <SearchModal />
         </div>
 
@@ -244,19 +329,59 @@ export default function Navbar() {
                       className="overflow-hidden"
                     >
                       <div className="flex flex-col gap-1 pl-4 pb-2">
-                        {collectionEntries.map((col) => (
-                          <Link
-                            key={col.href}
-                            href={col.href}
-                            onClick={closeMenu}
-                            className={cn(
-                              "rounded-lg py-2 px-3 text-sm font-medium text-gray-800 hover:bg-purple-50 hover:text-purple-600",
-                              pathname === col.href && "bg-purple-50 text-purple-600",
-                            )}
-                          >
-                            {t.collectionNav[col.slug]}
-                          </Link>
-                        ))}
+                        {collectionEntries.map((col) =>
+                          col.children ? (
+                            <div key={col.slug}>
+                              <button
+                                type="button"
+                                onClick={() => setIsEsarpOpen(!isEsarpOpen)}
+                                className="flex w-full items-center justify-between rounded-lg py-2 px-3 text-sm font-semibold text-gray-800 hover:bg-purple-50 hover:text-purple-600"
+                              >
+                                {t.collectionNav[col.slug]}
+                                <ChevronDown className={cn("h-4 w-4 transition-transform", isEsarpOpen && "rotate-180")} />
+                              </button>
+                              <AnimatePresence>
+                                {isEsarpOpen && (
+                                  <motion.div
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: "auto" }}
+                                    exit={{ opacity: 0, height: 0 }}
+                                    className="overflow-hidden"
+                                  >
+                                    <div className="flex flex-col gap-1 pl-4 pt-1">
+                                      {col.children.map((child) => (
+                                        <Link
+                                          key={child.slug}
+                                          href={child.href}
+                                          onClick={closeMenu}
+                                          className={cn(
+                                            "rounded-lg py-2 px-3 text-sm font-medium text-gray-700 hover:bg-purple-50 hover:text-purple-600",
+                                            child.slug === "esarp-tumu" && "font-semibold",
+                                            pathname === child.href && "bg-purple-50 text-purple-600",
+                                          )}
+                                        >
+                                          {t.collectionNav[child.slug]}
+                                        </Link>
+                                      ))}
+                                    </div>
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            </div>
+                          ) : (
+                            <Link
+                              key={col.slug}
+                              href={col.href}
+                              onClick={closeMenu}
+                              className={cn(
+                                "rounded-lg py-2 px-3 text-sm font-medium text-gray-800 hover:bg-purple-50 hover:text-purple-600",
+                                pathname === col.href && "bg-purple-50 text-purple-600",
+                              )}
+                            >
+                              {t.collectionNav[col.slug]}
+                            </Link>
+                          ),
+                        )}
                       </div>
                     </motion.div>
                   )}

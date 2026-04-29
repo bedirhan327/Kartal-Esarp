@@ -18,18 +18,27 @@ export default function ProductFilters({ products, children }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [sort, setSort] = useState<SortOption>("default");
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const [selectedSubCategories, setSelectedSubCategories] = useState<string[]>([]);
   const [onlyDiscount, setOnlyDiscount] = useState(false);
   const [onlyNew, setOnlyNew] = useState(false);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
 
   const allBrands = useMemo(() => [...new Set(products.map((p) => p.brand))].sort(), [products]);
+  const allSubCategories = useMemo(
+    () =>
+      [...new Set(products.map((p) => p.subCategory).filter((s): s is string => Boolean(s)))].sort(),
+    [products],
+  );
 
   const toggleBrand = (b: string) =>
     setSelectedBrands((prev) => (prev.includes(b) ? prev.filter((x) => x !== b) : [...prev, b]));
+  const toggleSubCategory = (s: string) =>
+    setSelectedSubCategories((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
 
   const clearAll = () => {
     setSelectedBrands([]);
+    setSelectedSubCategories([]);
     setOnlyDiscount(false);
     setOnlyNew(false);
     setMinPrice("");
@@ -37,12 +46,21 @@ export default function ProductFilters({ products, children }: Props) {
     setSort("default");
   };
 
-  const hasFilters = selectedBrands.length > 0 || onlyDiscount || onlyNew || minPrice || maxPrice || sort !== "default";
+  const hasFilters =
+    selectedBrands.length > 0 ||
+    selectedSubCategories.length > 0 ||
+    onlyDiscount ||
+    onlyNew ||
+    minPrice ||
+    maxPrice ||
+    sort !== "default";
 
   const filtered = useMemo(() => {
     let result = [...products];
 
     if (selectedBrands.length > 0) result = result.filter((p) => selectedBrands.includes(p.brand));
+    if (selectedSubCategories.length > 0)
+      result = result.filter((p) => p.subCategory && selectedSubCategories.includes(p.subCategory));
     if (onlyDiscount) result = result.filter((p) => p.oldPrice);
     if (onlyNew) result = result.filter((p) => p.isNew);
     if (minPrice) result = result.filter((p) => p.price >= Number(minPrice));
@@ -61,7 +79,7 @@ export default function ProductFilters({ products, children }: Props) {
     }
 
     return result;
-  }, [products, selectedBrands, onlyDiscount, onlyNew, minPrice, maxPrice, sort]);
+  }, [products, selectedBrands, selectedSubCategories, onlyDiscount, onlyNew, minPrice, maxPrice, sort]);
 
   const productCountLabel = t.filters.productCount.replace("{count}", String(filtered.length));
 
@@ -127,6 +145,28 @@ export default function ProductFilters({ products, children }: Props) {
                   ))}
                 </div>
               </div>
+
+              {allSubCategories.length > 1 && (
+                <div>
+                  <h4 className="mb-3 text-sm font-bold text-gray-900">{t.filters.subCategory}</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {allSubCategories.map((s) => (
+                      <button
+                        type="button"
+                        key={s}
+                        onClick={() => toggleSubCategory(s)}
+                        className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                          selectedSubCategories.includes(s)
+                            ? "bg-purple-600 text-white"
+                            : "bg-gray-100 text-gray-700 hover:bg-purple-50"
+                        }`}
+                      >
+                        {t.subCategoryLabels[s as keyof typeof t.subCategoryLabels] ?? s}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <div>
                 <h4 className="mb-3 text-sm font-bold text-gray-900">{t.filters.priceRange}</h4>

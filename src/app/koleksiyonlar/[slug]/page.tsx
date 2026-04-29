@@ -7,13 +7,15 @@ import ProductCard from "@/components/ProductCard";
 import ProductFilters from "@/components/ProductFilters";
 import Breadcrumb from "@/components/Breadcrumb";
 import PageTransition from "@/components/PageTransition";
-import { getProductsByCategory, getLimitedProducts, allProducts } from "@/lib/products";
+import { getProductsByCategory, getProductsBySubCategory, getLimitedProducts, allProducts } from "@/lib/products";
 import { useLocale } from "@/context/LocaleContext";
 
 interface CollectionMeta {
   image: string;
   category?: string;
+  subCategory?: string;
   isLimited?: boolean;
+  brands?: string[];
 }
 
 const collectionMeta: Record<string, CollectionMeta> = {
@@ -39,7 +41,31 @@ const collectionMeta: Record<string, CollectionMeta> = {
   },
   lux: {
     image: "/products/esarp-073.jpeg",
-    category: "lux",
+    brands: ["Vakko", "Armine"],
+  },
+  "esarp-twill-ipek": {
+    image: "/products/esarp-032.jpeg",
+    subCategory: "twill-ipek",
+  },
+  "esarp-yun-ipek": {
+    image: "/products/esarp-099.jpeg",
+    subCategory: "yun-ipek",
+  },
+  "esarp-pamuklu-ipek": {
+    image: "/products/esarp-091.jpeg",
+    subCategory: "pamuklu-ipek",
+  },
+  "esarp-viskon": {
+    image: "/products/esarp-035.jpeg",
+    subCategory: "viskon",
+  },
+  "esarp-cocuk": {
+    image: "/products/esarp-085.jpeg",
+    subCategory: "twill-cocuk-esarp",
+  },
+  "esarp-bandana": {
+    image: "/products/esarp-036.jpeg",
+    subCategory: "bandana",
   },
 };
 
@@ -61,9 +87,13 @@ export default function CollectionPage() {
 
   let products = meta.isLimited
     ? getLimitedProducts()
-    : meta.category
-      ? getProductsByCategory(meta.category)
-      : allProducts;
+    : meta.brands
+      ? allProducts.filter((p) => meta.brands!.includes(p.brand))
+      : meta.subCategory
+        ? getProductsBySubCategory(meta.subCategory)
+        : meta.category
+          ? getProductsByCategory(meta.category)
+          : allProducts;
 
   if (products.length === 0) {
     products = allProducts.slice(0, 4);

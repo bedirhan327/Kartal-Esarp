@@ -64,3 +64,53 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* ── Infinite brand marquee ───────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 24s linear infinite;
+}
+
+.animate-marquee-wrap:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* ── Floating particle ────────────────────────────── */
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0px) scale(1);   opacity: 0.5; }
+  50%       { transform: translateY(-22px) scale(1.25); opacity: 1; }
+}
+
+/* ── Scroll indicator dot ─────────────────────────── */
+@keyframes scroll-dot {
+  0%   { transform: translateY(0);   opacity: 1; }
+  80%  { transform: translateY(14px); opacity: 0; }
+  100% { transform: translateY(14px); opacity: 0; }
+}
+
+/* ── Shimmer sweep (category card shine) ─────────── */
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-100%) skewX(-12deg); }
+  100% { transform: translateX(300%)  skewX(-12deg); }
+}
+
+.card-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.18) 50%,
+    transparent 100%
+  );
+  animation: shimmer-sweep 3s ease-in-out infinite;
+  pointer-events: none;
+  border-radius: inherit;
+}

@@ -4,10 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { MessageCircle, Sparkles, Eye, GitCompareArrows, Check } from "lucide-react";
+import { MessageCircle, Sparkles, Eye, GitCompareArrows, Check, Heart } from "lucide-react";
 import type { Product } from "@/lib/products";
 import { handleWhatsAppOrder } from "@/lib/products";
 import { useCompare } from "@/components/CompareBar";
+import { useWishlist } from "@/context/WishlistContext";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/context/LocaleContext";
 import { localizeProduct } from "@/lib/i18n/localizeProduct";
@@ -20,7 +21,9 @@ const itemFadeIn = {
 export default function ProductCard({ product }: { product: Product }) {
   const { locale, t } = useLocale();
   const { add, remove, has } = useCompare();
+  const { toggle: toggleWishlist, has: inWishlist } = useWishlist();
   const inCompare = has(product.id);
+  const isFav = inWishlist(product.id);
   const [mobileExpanded, setMobileExpanded] = useState(false);
   const display = useMemo(() => localizeProduct(product, locale), [product, locale]);
   const priceLocale = locale === "en" ? "en-US" : "tr-TR";
@@ -153,6 +156,27 @@ export default function ProductCard({ product }: { product: Product }) {
           />
         )}
 
+        {/* Wishlist heart button */}
+        <motion.button
+          type="button"
+          data-compare
+          className={cn(
+            "absolute z-40 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full shadow-md backdrop-blur-sm transition-all",
+            product.isLimited ? "top-[5.25rem] right-3" : "top-12 right-3",
+            isFav ? "bg-pink-500 text-white" : "bg-white/80 text-gray-500 hover:bg-pink-50 hover:text-pink-500",
+          )}
+          whileTap={{ scale: 1.35 }}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleWishlist(product.id);
+          }}
+          title={isFav ? t.wishlist.remove : t.wishlist.add}
+        >
+          <Heart className={cn("h-4 w-4", isFav && "fill-white")} />
+        </motion.button>
+
+        {/* Compare button */}
         <span
           data-compare
           className={cn(
@@ -173,6 +197,18 @@ export default function ProductCard({ product }: { product: Product }) {
         >
           {inCompare ? <Check className="h-4 w-4" /> : <GitCompareArrows className="h-4 w-4" />}
         </span>
+
+        {/* Low stock badge — positioned below the NEW badge if present */}
+        {product.stock !== undefined && product.stock <= 5 && (
+          <span
+            className={cn(
+              "pointer-events-none absolute left-3 z-20 rounded-full bg-red-500/90 px-2.5 py-0.5 text-xs font-bold text-white shadow-sm backdrop-blur-sm",
+              product.isNew ? "top-12" : "top-3",
+            )}
+          >
+            {t.stock.low.replace("{n}", String(product.stock))}
+          </span>
+        )}
       </div>
     </motion.div>
   );

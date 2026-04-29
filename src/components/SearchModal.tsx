@@ -9,12 +9,18 @@ import { allProducts } from "@/lib/products";
 import { useLocale } from "@/context/LocaleContext";
 import { localizeProduct } from "@/lib/i18n/localizeProduct";
 
-export default function SearchModal() {
+export default function SearchModal({ autoFocus }: { autoFocus?: boolean }) {
   const { locale, t } = useLocale();
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (autoFocus) {
+      setTimeout(() => inputRef.current?.focus(), 50);
+    }
+  }, [autoFocus]);
 
   const catalog = useMemo(() => allProducts.map((p) => localizeProduct(p, locale)), [locale]);
 
@@ -60,9 +66,9 @@ export default function SearchModal() {
   const showDropdown = focused && q.length >= 2;
 
   return (
-    <div ref={wrapperRef} className="relative max-w-xl flex-1">
+    <div ref={wrapperRef} className="relative w-full max-w-xl flex-1 min-w-0">
       <div
-        className={`flex items-center rounded-full border bg-gray-50 transition-all ${focused ? "border-purple-400 ring-2 ring-purple-100 bg-white" : "border-gray-200"}`}
+        className={`flex min-w-0 items-center rounded-full border bg-gray-50 transition-all ${focused ? "border-purple-400 ring-2 ring-purple-100 bg-white" : "border-gray-200"}`}
       >
         <input
           ref={inputRef}
@@ -70,7 +76,7 @@ export default function SearchModal() {
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setFocused(true)}
           placeholder={t.search.placeholder}
-          className="flex-1 bg-transparent py-2.5 pl-5 pr-2 text-sm text-gray-900 outline-none placeholder:text-gray-400"
+          className="min-w-0 flex-1 truncate bg-transparent py-2.5 pl-5 pr-2 text-sm text-gray-900 outline-none placeholder:truncate placeholder:text-gray-400"
         />
         {query && (
           <button

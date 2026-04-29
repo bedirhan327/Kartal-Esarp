@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import WhatsAppFAB from "@/components/WhatsAppFAB";
 import ScrollToTop from "@/components/ScrollToTop";
 import CookieBanner from "@/components/CookieBanner";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import { Providers } from "@/components/Providers";
 
 const poppins = Poppins({
@@ -43,6 +44,7 @@ export default function RootLayout({
     <html lang="tr" suppressHydrationWarning className={`${poppins.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-[var(--font-poppins)]">
         <Providers>
+          <AnnouncementBar />
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />

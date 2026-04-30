@@ -27,6 +27,15 @@ export default function ProductCard({ product }: { product: Product }) {
   const [mobileExpanded, setMobileExpanded] = useState(false);
   const display = useMemo(() => localizeProduct(product, locale), [product, locale]);
   const priceLocale = locale === "en" ? "en-US" : "tr-TR";
+  const currencyFormatter = useMemo(
+    () =>
+      new Intl.NumberFormat(priceLocale, {
+        style: "currency",
+        currency: "TRY",
+        maximumFractionDigits: 0,
+      }),
+    [priceLocale],
+  );
 
   const resetMobileExpanded = useCallback(() => {
     if (typeof window !== "undefined" && window.matchMedia("(min-width: 1024px)").matches) {
@@ -82,57 +91,57 @@ export default function ProductCard({ product }: { product: Product }) {
           )}
         >
           <p className="text-xs font-medium text-white/70">{display.brand}</p>
-          <p className="text-base font-bold text-white">{display.price.toLocaleString(priceLocale)} TL</p>
+          <p className="text-base font-bold text-white">{currencyFormatter.format(display.price)}</p>
         </div>
 
         <div
           className={cn(
-            "pointer-events-none absolute bottom-0 left-0 right-0 z-20 translate-y-4 p-3 opacity-0 transition-all duration-500 @min-[360px]:p-4 @min-[420px]:p-5 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100",
+            "pointer-events-none absolute bottom-0 left-0 right-0 z-20 translate-y-4 p-2 opacity-0 transition-all duration-500 @min-[280px]:p-3 @min-[360px]:p-4 @min-[420px]:p-5 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100",
             mobileExpanded && "max-lg:pointer-events-auto max-lg:translate-y-0 max-lg:opacity-100",
           )}
         >
-          <p className="mb-1 text-[10px] font-bold uppercase leading-tight tracking-wider text-white/60 @min-[360px]:text-xs">
+          <p className="mb-0.5 text-[9px] font-bold uppercase leading-tight tracking-wider text-white/60 @min-[280px]:text-[10px] @min-[360px]:text-xs">
             {display.brand} &middot; {display.material}
           </p>
-          <h3 className="mb-1.5 text-sm font-bold leading-snug text-white @min-[360px]:text-base">{display.name}</h3>
-          <p className="mb-3 line-clamp-2 text-xs leading-relaxed text-white/60 @min-[360px]:text-sm">{display.description}</p>
-          <div className="mb-3 flex w-full min-w-0 flex-wrap items-center gap-x-2 gap-y-1.5 @min-[360px]:mb-4 @min-[360px]:gap-x-3">
-            <span className="text-base font-bold tabular-nums text-white @min-[360px]:text-lg @min-[420px]:text-xl">
-              {display.price.toLocaleString(priceLocale)} TL
+          <h3 className="mb-1 text-xs font-bold leading-snug text-white @min-[280px]:text-sm @min-[360px]:text-base">{display.name}</h3>
+          <p className="mb-1.5 hidden line-clamp-2 text-xs leading-relaxed text-white/60 @min-[280px]:mb-2 @min-[280px]:block @min-[360px]:text-sm">{display.description}</p>
+          <div className="mb-1.5 flex w-full min-w-0 flex-wrap items-center gap-x-1.5 gap-y-1 @min-[280px]:mb-2 @min-[280px]:gap-x-2 @min-[360px]:mb-3 @min-[360px]:gap-x-3">
+            <span className="text-sm font-bold tabular-nums text-white @min-[280px]:text-base @min-[360px]:text-lg @min-[420px]:text-xl">
+              {currencyFormatter.format(display.price)}
             </span>
             {product.oldPrice && (
-              <span className="shrink-0 text-xs text-white/40 line-through @min-[360px]:text-sm">
-                {product.oldPrice.toLocaleString(priceLocale)} TL
+              <span className="shrink-0 text-[10px] text-white/40 line-through @min-[280px]:text-xs @min-[360px]:text-sm">
+                {currencyFormatter.format(product.oldPrice)}
               </span>
             )}
             {product.oldPrice && (
-              <span className="shrink-0 rounded-full bg-red-500/80 px-2 py-0.5 text-[10px] font-bold text-white @min-[360px]:text-xs">
+              <span className="shrink-0 rounded-full bg-red-500/80 px-1.5 py-0.5 text-[9px] font-bold text-white @min-[280px]:px-2 @min-[280px]:text-[10px] @min-[360px]:text-xs">
                 -%{Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)}
               </span>
             )}
           </div>
           <div
             data-action
-            className="relative z-30 flex w-full min-w-0 flex-col gap-2 @min-[340px]:flex-row @min-[340px]:gap-2"
+            className="relative z-30 flex w-full min-w-0 flex-col gap-1.5 @min-[340px]:flex-row @min-[340px]:gap-2"
           >
             <Link
               href={`/urun/${product.id}`}
               data-action
-              className="flex min-h-[44px] w-full min-w-0 items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-3 py-2.5 text-xs font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 @min-[340px]:flex-1 @min-[360px]:text-sm"
+              className="flex min-h-[32px] w-full min-w-0 items-center justify-center gap-1.5 rounded-full border border-white/30 bg-white/10 px-2 py-1.5 text-[11px] font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 @min-[280px]:min-h-[36px] @min-[340px]:flex-1 @min-[360px]:min-h-[40px] @min-[360px]:px-3 @min-[360px]:text-xs"
               onClick={(e) => e.stopPropagation()}
             >
-              <Eye className="h-4 w-4 shrink-0" /> <span className="truncate">{t.productCard.viewDetails}</span>
+              <Eye className="h-3.5 w-3.5 shrink-0 @min-[360px]:h-4 @min-[360px]:w-4" /> <span className="truncate">{t.productCard.viewDetails}</span>
             </Link>
             <span
               data-action
-              className="flex min-h-[44px] w-full min-w-0 cursor-pointer items-center justify-center gap-2 rounded-full bg-green-500 px-3 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-green-600 @min-[340px]:flex-1 @min-[360px]:text-sm"
+              className="flex min-h-[32px] w-full min-w-0 cursor-pointer items-center justify-center gap-1.5 rounded-full bg-green-500 px-2 py-1.5 text-[11px] font-semibold text-white transition-colors hover:bg-green-600 @min-[280px]:min-h-[36px] @min-[340px]:flex-1 @min-[360px]:min-h-[40px] @min-[360px]:px-3 @min-[360px]:text-xs"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 window.open(handleWhatsAppOrder(product), "_blank", "noopener,noreferrer");
               }}
             >
-              <MessageCircle className="h-4 w-4 shrink-0" /> <span className="truncate">{t.productCard.order}</span>
+              <MessageCircle className="h-3.5 w-3.5 shrink-0 @min-[360px]:h-4 @min-[360px]:w-4" /> <span className="truncate">{t.productCard.order}</span>
             </span>
           </div>
         </div>

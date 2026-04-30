@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { SlidersHorizontal, X, ChevronDown } from "lucide-react";
+import { useState, useMemo, useEffect } from "react";
+import { SlidersHorizontal, X, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+
+const ITEMS_PER_PAGE = 40;
 import { motion, AnimatePresence } from "framer-motion";
 import type { Product } from "@/lib/products";
 import { useLocale } from "@/context/LocaleContext";
@@ -17,6 +19,7 @@ export default function ProductFilters({ products, children }: Props) {
   const { t } = useLocale();
   const [isOpen, setIsOpen] = useState(false);
   const [sort, setSort] = useState<SortOption>("default");
+  const [page, setPage] = useState(1);
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [selectedSubCategories, setSelectedSubCategories] = useState<string[]>([]);
   const [onlyDiscount, setOnlyDiscount] = useState(false);
@@ -80,6 +83,14 @@ export default function ProductFilters({ products, children }: Props) {
 
     return result;
   }, [products, selectedBrands, selectedSubCategories, onlyDiscount, onlyNew, minPrice, maxPrice, sort]);
+
+  // Filtre değişince 1. sayfaya dön
+  useEffect(() => {
+    setPage(1);
+  }, [filtered]);
+
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const paginated = filtered.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
 
   const productCountLabel = t.filters.productCount.replace("{count}", String(filtered.length));
 
@@ -210,7 +221,46 @@ export default function ProductFilters({ products, children }: Props) {
         )}
       </AnimatePresence>
 
-      {children(filtered)}
+      {children(paginated)}
+
+      {totalPages > 1 && (
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-2">
+          <button
+            type="button"
+            onClick={() => { setPage((p) => p - 1); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+            disabled={page === 1}
+            className="flex items-center gap-1 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition-colors hover:border-purple-300 hover:text-purple-600 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            <ChevronLeft className="h-4 w-4" />
+            Önceki
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+            <button
+              key={n}
+              type="button"
+              onClick={() => { setPage(n); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+              className={`h-9 w-9 rounded-full text-sm font-medium transition-colors ${
+                page === n
+                  ? "bg-purple-600 text-white shadow-md"
+                  : "border border-gray-200 bg-white text-gray-700 hover:border-purple-300 hover:text-purple-600"
+              }`}
+            >
+              {n}
+            </button>
+          ))}
+
+          <button
+            type="button"
+            onClick={() => { setPage((p) => p + 1); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+            disabled={page === totalPages}
+            className="flex items-center gap-1 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition-colors hover:border-purple-300 hover:text-purple-600 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            Sonraki
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

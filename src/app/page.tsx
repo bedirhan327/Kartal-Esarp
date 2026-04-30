@@ -58,6 +58,15 @@ const limitedStars = [
 export default function Home() {
   const { locale, t } = useLocale();
   const priceLocale = locale === "en" ? "en-US" : "tr-TR";
+  const currencyFormatter = useMemo(
+    () =>
+      new Intl.NumberFormat(priceLocale, {
+        style: "currency",
+        currency: "TRY",
+        maximumFractionDigits: 0,
+      }),
+    [priceLocale],
+  );
 
   /* scroll hooks */
   const { scrollYProgress, scrollY } = useScroll();
@@ -300,7 +309,9 @@ export default function Home() {
               const shortName = d.name
                 .replace(`${product.brand} `, "")
                 .replace(/Twill (İpek )?Esarp - /i, "")
-                .replace(/Twill Esarp - /i, "");
+                .replace(/Twill Esarp - /i, "")
+                .replace(/Twill (Silk )?Scarf - /i, "")
+                .replace(/Silk Scarf - /i, "");
               return (
                 <Link key={product.id} href={`/urun/${product.id}`}>
                   <motion.div
@@ -319,13 +330,13 @@ export default function Home() {
                       </span>
                       <div className="absolute bottom-0 left-0 right-0 translate-y-2 p-4 opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
                         <p className="text-xs text-white/80">{product.brand}</p>
-                        <p className="text-sm font-bold text-white">{product.price.toLocaleString(priceLocale)} TL</p>
+                        <p className="text-sm font-bold text-white">{currencyFormatter.format(product.price)}</p>
                       </div>
                     </div>
                     <div className="mt-3 px-1">
                       <p className="text-xs text-gray-400">{product.brand}</p>
                       <p className="truncate text-sm font-semibold text-gray-800">{shortName}</p>
-                      <p className="text-sm font-bold text-purple-600">{product.price.toLocaleString(priceLocale)} TL</p>
+                      <p className="text-sm font-bold text-purple-600">{currencyFormatter.format(product.price)}</p>
                     </div>
                   </motion.div>
                 </Link>

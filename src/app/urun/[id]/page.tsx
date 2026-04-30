@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, Package, Ruler, Palette, ShieldCheck, Sparkles, Heart, AlertTriangle, X, ChevronLeft, ChevronRight } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/ProductCard";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -106,7 +107,7 @@ export default function ProductDetail() {
                     </span>
                   )}
                 </button>
-                {/* Thumbnails — only shown when there are multiple images */}
+                {/* Thumbnails */}
                 {allImages.length > 1 && (
                   <div className="flex gap-3">
                     {allImages.map((img, i) => (
@@ -251,7 +252,6 @@ export default function ProductDetail() {
               className="fixed inset-0 z-[500] flex items-center justify-center bg-black/92 backdrop-blur-sm"
               onClick={() => setLightboxOpen(false)}
             >
-              {/* Close */}
               <button
                 type="button"
                 onClick={() => setLightboxOpen(false)}
@@ -260,7 +260,6 @@ export default function ProductDetail() {
                 <X className="h-5 w-5" />
               </button>
 
-              {/* Prev */}
               {allImages.length > 1 && (
                 <button
                   type="button"
@@ -271,7 +270,6 @@ export default function ProductDetail() {
                 </button>
               )}
 
-              {/* Image */}
               <motion.div
                 key={lightboxIndex}
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -290,7 +288,6 @@ export default function ProductDetail() {
                 />
               </motion.div>
 
-              {/* Next */}
               {allImages.length > 1 && (
                 <button
                   type="button"
@@ -301,7 +298,6 @@ export default function ProductDetail() {
                 </button>
               )}
 
-              {/* Dot indicators */}
               {allImages.length > 1 && (
                 <div className="absolute bottom-6 flex gap-2">
                   {allImages.map((_, i) => (

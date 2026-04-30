@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -26,21 +26,20 @@ export default function RecentlyViewed({ excludeId }: { excludeId?: number }) {
   const { locale, t } = useLocale();
   const priceLocale = locale === "en" ? "en-US" : "tr-TR";
 
-  const products = useMemo(() => {
-    if (typeof window === "undefined") return [] as Product[];
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return [];
+      if (!raw) return;
       const ids: number[] = JSON.parse(raw);
       const items = ids
         .filter((id) => id !== excludeId)
         .map((id) => getProductById(id))
         .filter(Boolean) as Product[];
-      return items.slice(0, 6);
-    } catch {
-      return [];
-    }
-  }, [excludeId, locale]);
+      setProducts(items.slice(0, 6));
+    } catch {}
+  }, [excludeId]);
 
   if (products.length === 0) return null;
 
